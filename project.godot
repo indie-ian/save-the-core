@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="filter-factory"
+config/name="save-the-core"
 run/main_scene="uid://j3v25m0kjgvn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
