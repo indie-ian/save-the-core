@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://j3v25m0kjgvn"]
+
+[ext_resource type="Script" uid="uid://b07fj4w3ahs1o" path="res://global/managers/manager.gd" id="1_rle6p"]
+[ext_resource type="PackedScene" uid="uid://qmtiqk86qvf1" path="res://ui/menus/splash/splash.tscn" id="2_0vy1w"]
+[ext_resource type="Script" uid="uid://bn6j84cyjb4yj" path="res://global/game_state/game_state.gd" id="2_jmxpp"]
+
+[node name="Manager" type="Node" unique_id=1767189583 node_paths=PackedStringArray("current_ui")]
+script = ExtResource("1_rle6p")
+current_ui = NodePath("UITree/Splash")
+metadata/_custom_type_script = "uid://b07fj4w3ahs1o"
+
+[node name="States" type="Node" parent="." unique_id=1330010660]
+
+[node name="GameState" type="Node" parent="States" unique_id=1743074936]
+script = ExtResource("2_jmxpp")
+metadata/_custom_type_script = "uid://bn6j84cyjb4yj"
+
+[node name="Node2DTree" type="Node2D" parent="." unique_id=2116376932]
+
+[node name="UITree" type="Control" parent="." unique_id=44916047]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Splash" parent="UITree" unique_id=1191906707 instance=ExtResource("2_0vy1w")]
+layout_mode = 1
+
+[node name="NarrativeTree" type="CanvasLayer" parent="." unique_id=1975526959]
+
+[node name="PauseTree" type="CanvasLayer" parent="." unique_id=516355939]

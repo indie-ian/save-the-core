@@ -1,0 +1,51 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="filter-factory"
+run/main_scene="uid://j3v25m0kjgvn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="uid://cgim73rq43aju"
+
+[autoload]
+
+Global="*uid://clyotcp8ucdye"
+Library="*uid://dsqa0n466og6"
+Sounds="*uid://ci4bsd68th4n"
+SignalBus="*uid://dog8nhhaid2lg"
+
+[display]
+
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/stretch/mode="canvas_items"
+
+[file_customization]
+
+folder_colors={
+"res://global/": "gray",
+"res://ui/": "green"
+}
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

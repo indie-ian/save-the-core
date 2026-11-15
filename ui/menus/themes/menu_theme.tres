@@ -1,0 +1,62 @@
+[gd_resource type="Theme" format=3 uid="uid://cfr3f6n5orvpt"]
+
+[ext_resource type="FontFile" uid="uid://ddy4efwrsuy6n" path="res://ui/fonts/PixelOperator.ttf" id="1_6e0fd"]
+[ext_resource type="FontFile" uid="uid://egw4yjsa783e" path="res://ui/fonts/PixelOperator-Bold.ttf" id="2_5c7pn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdety"]
+bg_color = Color(0.25882354, 0.2, 0.23529412, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.34509805, 0.5921569, 0.6156863, 1)
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ry8ac"]
+bg_color = Color(0.34509805, 0.5921569, 0.6156863, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25882354, 0.2, 0.23529412, 1)
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqgmb"]
+bg_color = Color(0.6039216, 0.33333334, 0.32156864, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25882354, 0.2, 0.23529412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qt8c0"]
+bg_color = Color(0.34509805, 0.5921569, 0.6156863, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25882354, 0.2, 0.23529412, 1)
+
+[resource]
+Button/colors/font_color = Color(0.25882354, 0.2, 0.23529412, 1)
+Button/colors/font_hover_color = Color(0.34509805, 0.5921569, 0.6156863, 1)
+Button/colors/font_pressed_color = Color(0.34509805, 0.5921569, 0.6156863, 1)
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_6e0fd")
+Button/styles/hover = SubResource("StyleBoxFlat_pdety")
+Button/styles/normal = SubResource("StyleBoxFlat_ry8ac")
+Button/styles/pressed = SubResource("StyleBoxFlat_pdety")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_qqgmb")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_qqgmb")
+Label/font_sizes/font_size = 24
+Panel/styles/panel = SubResource("StyleBoxFlat_qt8c0")
+SmallTextLabel/base_type = &"Label"
+SmallTextLabel/colors/font_color = Color(0.25882354, 0.2, 0.23529412, 1)
+SmallTextLabel/font_sizes/font_size = 24
+SmallTextLabel/fonts/font = ExtResource("1_6e0fd")
+TitleTextLabel/base_type = &"Label"
+TitleTextLabel/colors/font_color = Color(0.25882354, 0.2, 0.23529412, 1)
+TitleTextLabel/font_sizes/font_size = 48
+TitleTextLabel/fonts/font = ExtResource("2_5c7pn")

@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://camkq2dhxi78"]
+
+[ext_resource type="Script" uid="uid://ck7u0luavxl6g" path="res://ui/menus/credits/credits.gd" id="1_h1tht"]
+[ext_resource type="Theme" uid="uid://cfr3f6n5orvpt" path="res://ui/menus/themes/menu_theme.tres" id="1_qjml7"]
+
+[node name="Credits" type="Control" unique_id=1138913588]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h1tht")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1792223589]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8039216, 0.5294118, 0.4117647, 1)
+
+[node name="TitleMargin" type="MarginContainer" parent="." unique_id=192622886]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 32
+
+[node name="TitleLabel" type="Label" parent="TitleMargin" unique_id=929572519]
+layout_mode = 2
+theme = ExtResource("1_qjml7")
+theme_type_variation = &"TitleTextLabel"
+text = "CREDITS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonMargin" type="MarginContainer" parent="." unique_id=506010428]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 32
+
+[node name="MainButton" type="Button" parent="ButtonMargin" unique_id=397491141]
+layout_mode = 2
+theme = ExtResource("1_qjml7")
+text = "MAIN MENU"

@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://dihhhs4atxs2v"]
+
+[ext_resource type="Script" uid="uid://cmofiii6587m0" path="res://ui/menus/options/options.gd" id="1_2oi6d"]
+[ext_resource type="Theme" uid="uid://cfr3f6n5orvpt" path="res://ui/menus/themes/menu_theme.tres" id="2_3lfxk"]
+
+[node name="Options" type="Control" unique_id=1138913588]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2oi6d")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1792223589]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8039216, 0.5294118, 0.4117647, 1)
+
+[node name="TitleMargin" type="MarginContainer" parent="." unique_id=192622886]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 32
+
+[node name="TitleLabel" type="Label" parent="TitleMargin" unique_id=929572519]
+layout_mode = 2
+theme = ExtResource("2_3lfxk")
+theme_type_variation = &"TitleTextLabel"
+text = "OPTIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonMargin" type="MarginContainer" parent="." unique_id=506010428]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 32
+
+[node name="MainButton" type="Button" parent="ButtonMargin" unique_id=397491141]
+layout_mode = 2
+theme = ExtResource("2_3lfxk")
+text = "MAIN MENU"
+
+[node name="OptionsHBox" type="HBoxContainer" parent="." unique_id=1327818058]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AudioPanel" type="Panel" parent="OptionsHBox" unique_id=346311757]
+custom_minimum_size = Vector2(320, 320)
+layout_mode = 2
+theme = ExtResource("2_3lfxk")
+
+[node name="AudioMargin" type="MarginContainer" parent="OptionsHBox/AudioPanel" unique_id=1121718452]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_right = 26.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 16
+
+[node name="AudioLabel" type="Label" parent="OptionsHBox/AudioPanel/AudioMargin" unique_id=335274110]
+layout_mode = 2
+theme = ExtResource("2_3lfxk")
+theme_type_variation = &"SmallTextLabel"
+text = "AUDIO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioSliderVBox" type="VBoxContainer" parent="OptionsHBox/AudioPanel" unique_id=1762900045]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -38.5
+offset_right = 37.5
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="OptionsHBox/AudioPanel/AudioSliderVBox" unique_id=1498173927]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 2
+
+[node name="MasterLabel" type="Label" parent="OptionsHBox/AudioPanel/AudioSliderVBox/GridContainer" unique_id=277262425]
+layout_mode = 2
+theme = ExtResource("2_3lfxk")
+theme_type_variation = &"SmallTextLabel"
+text = "MASTER  "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MasterHSlider" type="HSlider" parent="OptionsHBox/AudioPanel/AudioSliderVBox/GridContainer" unique_id=2114740432]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_3lfxk")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MusicLabel" type="Label" parent="OptionsHBox/AudioPanel/AudioSliderVBox/GridContainer" unique_id=304668187]
+layout_mode = 2
+theme = ExtResource("2_3lfxk")
+theme_type_variation = &"SmallTextLabel"
+text = "MUSIC  "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MusicHSlider" type="HSlider" parent="OptionsHBox/AudioPanel/AudioSliderVBox/GridContainer" unique_id=669025559]
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXLabel" type="Label" parent="OptionsHBox/AudioPanel/AudioSliderVBox/GridContainer" unique_id=803746052]
+layout_mode = 2
+theme = ExtResource("2_3lfxk")
+theme_type_variation = &"SmallTextLabel"
+text = "SFX  "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SFXHSlider" type="HSlider" parent="OptionsHBox/AudioPanel/AudioSliderVBox/GridContainer" unique_id=635695282]
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0

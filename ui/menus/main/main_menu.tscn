@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://uu71xp4cia35"]
+
+[ext_resource type="Script" uid="uid://c11pnabl5dxlh" path="res://ui/menus/main/main_menu.gd" id="1_86e05"]
+[ext_resource type="Theme" uid="uid://cfr3f6n5orvpt" path="res://ui/menus/themes/menu_theme.tres" id="1_db6jy"]
+
+[node name="MainMenu" type="Control" unique_id=819367203]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_86e05")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1400434865]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8039216, 0.5294118, 0.4117647, 1)
+
+[node name="MainVBox" type="VBoxContainer" parent="." unique_id=1417643644]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.5
+offset_top = -20.0
+offset_right = 45.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="MainVBox" unique_id=1779426514]
+layout_mode = 2
+theme = ExtResource("1_db6jy")
+theme_type_variation = &"TitleTextLabel"
+text = "GAME TITLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonVBox" type="VBoxContainer" parent="MainVBox" unique_id=1651700042]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="StartButton" type="Button" parent="MainVBox/ButtonVBox" unique_id=1085266548]
+layout_mode = 2
+theme = ExtResource("1_db6jy")
+text = "START"
+
+[node name="OptionsButton" type="Button" parent="MainVBox/ButtonVBox" unique_id=1353460313]
+layout_mode = 2
+theme = ExtResource("1_db6jy")
+text = "OPTIONS"
+
+[node name="CreditsButton" type="Button" parent="MainVBox/ButtonVBox" unique_id=973125016]
+layout_mode = 2
+theme = ExtResource("1_db6jy")
+text = "CREDITS"
+
+[node name="ExitButton" type="Button" parent="MainVBox/ButtonVBox" unique_id=635898341]
+layout_mode = 2
+theme = ExtResource("1_db6jy")
+text = "EXIT"
