@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cmwylb2fgsg7n"]
+
+[ext_resource type="PackedScene" uid="uid://d3ymj10jcrk77" path="res://environment/layers/scenes/crust.tscn" id="1_lhl8g"]
+[ext_resource type="PackedScene" uid="uid://dgq7fcsrd2bs0" path="res://sandbox/player_rig.tscn" id="2_la80o"]
+
+[node name="EarthLayers" type="Node2D" unique_id=417656315]
+
+[node name="Crust" parent="." unique_id=1304774369 instance=ExtResource("1_lhl8g")]
+
+[node name="RigidBody2D" parent="." unique_id=945059762 instance=ExtResource("2_la80o")]
+position = Vector2(480, 216)

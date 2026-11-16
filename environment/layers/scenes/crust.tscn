@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://d3ymj10jcrk77"]
+
+[ext_resource type="Script" uid="uid://c0hwyfirb54ii" path="res://environment/layers/classes/earth_layer_class.gd" id="1_wcn62"]
+
+[node name="Crust" type="Node2D" unique_id=1304774369]
+script = ExtResource("1_wcn62")
+layer_type = "CRUST"
+layer_depth = 576
+metadata/_custom_type_script = "uid://c0hwyfirb54ii"
+
+[node name="Background" type="TileMapLayer" parent="." unique_id=1761498930]
+
+[node name="Foreground" type="TileMapLayer" parent="." unique_id=868927197]

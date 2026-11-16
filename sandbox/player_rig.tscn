@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dgq7fcsrd2bs0"]
+
+[ext_resource type="Script" uid="uid://c27pgln3md558" path="res://sandbox/player_rig.gd" id="1_8q8w8"]
+[ext_resource type="Texture2D" uid="uid://ifcghhipld4o" path="res://sandbox/test_rig.png" id="2_sxt12"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oeaa7"]
+radius = 8.0
+height = 24.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ry8ac"]
+size = Vector2(20, 16)
+
+[node name="RigidBody2D" type="CharacterBody2D" unique_id=945059762]
+motion_mode = 1
+script = ExtResource("1_8q8w8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=101451277]
+texture = ExtResource("2_sxt12")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2084035184]
+position = Vector2(-4, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_oeaa7")
+
+[node name="Drill" type="Area2D" parent="." unique_id=712313855]
+position = Vector2(8, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="DrillCollision" type="CollisionShape2D" parent="Drill" unique_id=1974802610]
+position = Vector2(10, 0)
+shape = SubResource("RectangleShape2D_ry8ac")
