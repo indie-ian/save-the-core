@@ -1,5 +1,13 @@
 extends Node
 
+#region Objects
+enum DepositSize {
+	LARGE,
+	MEDIUM,
+	SMALL,
+}
+#endregion
+
 #region UI Scenes
 const SPLASH_SCENE: String = "uid://qmtiqk86qvf1"
 const MAIN_MENU_SCENE: String = "uid://uu71xp4cia35"

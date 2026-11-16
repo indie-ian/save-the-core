@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://eka4lmkl2k3a"]
+
+[ext_resource type="Script" uid="uid://tcyp1ib2og8s" path="res://environment/objects/classes/damage_deposit_class.gd" id="1_5xgop"]
+[ext_resource type="Texture2D" uid="uid://ckny17wh4h542" path="res://environment/objects/sprites/small_damage_deposit.png" id="2_vppgx"]
+
+[node name="SmallDamageDeposit" type="CharacterBody2D" unique_id=2143115054]
+script = ExtResource("1_5xgop")
+size_type = 2
+metadata/_custom_type_script = "uid://tcyp1ib2og8s"
+
+[node name="DepositCollision" type="CollisionPolygon2D" parent="." unique_id=1841582630]
+polygon = PackedVector2Array(-30, -23, -25, -26, -3, -26, 23, -15, 28, -10, 30, -1, 29, 5, 19, 18, 9, 26, -15, 21, -22, 11, -30, -14)
+
+[node name="DepositSprite" type="Sprite2D" parent="." unique_id=1270370142]
+texture = ExtResource("2_vppgx")

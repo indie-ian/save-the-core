@@ -11,3 +11,7 @@ metadata/_custom_type_script = "uid://c0hwyfirb54ii"
 [node name="Background" type="TileMapLayer" parent="." unique_id=1761498930]
 
 [node name="Foreground" type="TileMapLayer" parent="." unique_id=868927197]
+
+[node name="DamageContainer" type="Node2D" parent="." unique_id=833726002]
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=384606496]
