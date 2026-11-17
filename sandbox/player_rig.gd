@@ -16,6 +16,10 @@ const BAR_OFFSET = Vector2(0, -45)
 const POINTER_START_Y = -25.0 
 const POINTER_END_Y = -70.0    
 
+const MAX_LIQUID: float = 100.0
+const LIQUID_LOSS_OVERCHARGE: float = 25.0  # liquid Overcharge loss
+const LIQUID_LOSS_WEAK_CHARGE: float = 15.0 # if you let mouse to early liquid loss 60%
+var current_liquid: float = MAX_LIQUID
 
 var drill_area: Vector2 = Vector2(24, 24)
 var is_charging: bool = false
@@ -36,6 +40,15 @@ var shake_strength: float = 0.0
 
 @onready var damage_bar: TextureProgressBar = $stats/DamageBar
 
+@onready var switch: AnimatedSprite2D = $stats/switch
+@onready var green_light: Sprite2D = $stats/greenLight
+@onready var redlight: Sprite2D = $stats/redlight
+
+@onready var liquid: TextureProgressBar = $stats/liquid
+
+#for the light switch
+var is_switching: bool = false
+
 var is_turbo_active: bool = false
 
 const MAX_DAMAGE: float = 100.0
@@ -47,6 +60,9 @@ var current_damage: float = 0.0
 var hit_cooldown: float = 0.0
 var is_dashing: bool = false
 var danger_tween: Tween
+var stats_offset: Vector2
+var initial_stats_scale: Vector2
+
 
 func _ready() -> void:
 	drill.body_entered.connect(_drill_area)
@@ -58,6 +74,19 @@ func _ready() -> void:
 	#stats ui drill damage
 	damage_bar.max_value = MAX_DAMAGE
 	damage_bar.value = current_damage
+	
+	initial_stats_scale = stats.scale
+	initial_stats_scale = stats.global_scale
+	stats_offset = stats.global_position - global_position
+	
+	#lights and switch to indicate the part you are cooling by default it cools the engine
+	#so thats why only the green light is on
+	redlight.hide()
+	
+	#liquid bar
+	liquid.max_value = MAX_LIQUID
+	liquid.step = 0.01 
+	liquid.value = current_liquid
 	
 
 func _physics_process(delta: float) -> void:
@@ -71,8 +100,9 @@ func _physics_process(delta: float) -> void:
 	failed.global_rotation = 0.0
 	max_charge_sprite.global_position = global_position + Vector2(0, -90) 
 	max_charge_sprite.global_rotation = 0.0
-	stats.global_position= global_position 
+	stats.global_position = global_position + stats_offset
 	stats.global_rotation = 0.0
+	
 	
 	if max_charge_sprite.visible:
 		max_charge_sprite.global_position = global_position + Vector2(0, -65)
@@ -105,6 +135,7 @@ func _physics_process(delta: float) -> void:
 				overcharged = true
 				_trigger_overcharge_effects()
 				print("OVERCHARGED")
+				_consume_liquid(LIQUID_LOSS_OVERCHARGE)
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			
@@ -122,7 +153,10 @@ func _physics_process(delta: float) -> void:
 			else:
 				launch_power = lerp(MIN_LAUNCH_SPEED, MAX_LAUNCH_SPEED, charge_ratio)
 				shake_strength = 10 #small shake when you do smaller charge
-				
+				if charge_ratio >= 0.60:
+					pass
+				else:
+					_consume_liquid(LIQUID_LOSS_WEAK_CHARGE)
 			_launch(mouse_pos, launch_power)
 			
 		elif Input.is_action_pressed("ui_up"):
@@ -133,7 +167,6 @@ func _physics_process(delta: float) -> void:
 		shake_strength = lerp(shake_strength, 0.0, 10.0 * delta)
 		camera.offset = Vector2(randf_range(-shake_strength, shake_strength),randf_range(-shake_strength, shake_strength))
 	
-
 	move_and_slide()
 	
 	
@@ -271,18 +304,46 @@ func _start_danger_pulse() -> void:
 	if danger_tween and danger_tween.is_valid():
 		return
 		
-	danger_tween = create_tween().set_loops() # repeat shake
+	danger_tween = create_tween().set_loops()
 	
-	danger_tween.tween_property(stats, "scale", Vector2(1.02, 1.02), 0.25).set_trans(Tween.TRANS_SINE)
+	danger_tween.tween_property(stats, "global_scale", initial_stats_scale * 1.02, 0.25).set_trans(Tween.TRANS_SINE)
 	danger_tween.parallel().tween_property(stats, "modulate", Color(1.0, 0.25, 0.25), 0.25)
 	
-	danger_tween.tween_property(stats, "scale", Vector2(1.0, 1.0), 0.25).set_trans(Tween.TRANS_SINE)
-	danger_tween.parallel().tween_property(stats, "modulate", Color.WHITE, 0.12)
+	danger_tween.tween_property(stats, "global_scale", initial_stats_scale, 0.25).set_trans(Tween.TRANS_SINE)
+	danger_tween.parallel().tween_property(stats, "modulate", Color.WHITE, 0.25)
 
 func _stop_danger_pulse() -> void:
 	if danger_tween and danger_tween.is_valid():
 		danger_tween.kill()
-		
-	#back to normal state
-	stats.scale = Vector2(1.0, 1.0)
+	stats.global_scale = initial_stats_scale
 	stats.modulate = Color.WHITE
+
+
+# when the mouse enters the area switch change 
+func _on_area_2d_mouse_entered() -> void:
+	if is_switching:
+		return	
+	is_switching = true
+	if not redlight.visible:
+		switch.play("GreenToRed")
+		await switch.animation_finished
+		redlight.show()
+		green_light.hide()
+	else:
+		switch.play("redToGreen")
+		await switch.animation_finished
+		green_light.show()
+		redlight.hide()
+	is_switching = false
+	
+func _consume_liquid(amount: float) -> void:
+	current_liquid = clamp(current_liquid - amount, 0.0, MAX_LIQUID)
+	liquid.value = current_liquid
+	
+	if amount >= 5.0:
+		liquid.modulate = Color(1.0, 0.3, 0.3)
+		var bar_tween = create_tween()
+		bar_tween.tween_property(liquid, "modulate", Color.WHITE, 0.35)
+		
+	if current_liquid <= 0:
+		print("no liquid")
