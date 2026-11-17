@@ -4,12 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ccal7mvdwa7jr" path="res://environment/layers/scenes/upper_mantle.tscn" id="2_8hh62"]
 [ext_resource type="PackedScene" uid="uid://dgq7fcsrd2bs0" path="res://sandbox/player_rig.tscn" id="2_la80o"]
 [ext_resource type="PackedScene" uid="uid://b64pm1sr5i0sc" path="res://environment/layers/scenes/lower_mantle.tscn" id="3_hbnqd"]
-[ext_resource type="Texture2D" uid="uid://crevukiknk0qq" path="res://sandbox/playerAssets/statsAssets/DrillStatsInterfaces.png" id="3_sfqoi"]
 [ext_resource type="PackedScene" uid="uid://2qkqvn5lbowy" path="res://environment/layers/scenes/outer_core.tscn" id="4_mlb10"]
-[ext_resource type="Texture2D" uid="uid://b8f3rmtkkt5ra" path="res://sandbox/playerAssets/statsAssets/DamageProgressBar.png" id="4_u3cit"]
-[ext_resource type="Texture2D" uid="uid://csj7im0akxxgc" path="res://sandbox/playerAssets/statsAssets/GreenLightON.png" id="5_8hh62"]
-[ext_resource type="Texture2D" uid="uid://wsa0ff2h3s3b" path="res://sandbox/playerAssets/statsAssets/redLightON.png" id="6_hbnqd"]
-[ext_resource type="Texture2D" uid="uid://dpcki1p71xvke" path="res://sandbox/playerAssets/statsAssets/CoolingLiquidBar.png" id="7_mlb10"]
 
 [node name="EarthLayers" type="Node2D" unique_id=417656315]
 
@@ -27,33 +22,3 @@ position = Vector2(480, 11340)
 
 [node name="RigidBody2D" parent="." unique_id=945059762 instance=ExtResource("2_la80o")]
 position = Vector2(480, 216)
-
-[node name="DrillStatsInterfaces" type="Sprite2D" parent="." unique_id=851659679]
-position = Vector2(106, 105)
-scale = Vector2(3, 3)
-texture = ExtResource("3_sfqoi")
-
-[node name="DrillStatsInterfaces2" type="Sprite2D" parent="." unique_id=146952472]
-position = Vector2(100, 331)
-scale = Vector2(3, 3)
-texture = ExtResource("3_sfqoi")
-
-[node name="DamageProgressBar" type="Sprite2D" parent="." unique_id=525815343]
-position = Vector2(74, 313)
-scale = Vector2(3, 3)
-texture = ExtResource("4_u3cit")
-
-[node name="GreenLightOn" type="Sprite2D" parent="." unique_id=2042218976]
-position = Vector2(163, 290.5)
-scale = Vector2(3, 2.9999967)
-texture = ExtResource("5_8hh62")
-
-[node name="RedLightOn" type="Sprite2D" parent="." unique_id=1222135530]
-position = Vector2(163.00002, 329.5)
-scale = Vector2(3, 2.9999967)
-texture = ExtResource("6_hbnqd")
-
-[node name="CoolingLiquidBar" type="Sprite2D" parent="." unique_id=1741159806]
-position = Vector2(71.5, 385.00003)
-scale = Vector2(3.0000002, 3)
-texture = ExtResource("7_mlb10")
