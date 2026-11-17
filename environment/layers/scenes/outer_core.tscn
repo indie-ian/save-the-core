@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://2qkqvn5lbowy"]
+
+[ext_resource type="Texture2D" uid="uid://dhv4x2quqslwh" path="res://environment/layers/sprites/outer_core.png" id="1_6n6tf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ry8ac"]
+size = Vector2(128, 3240)
+
+[node name="OuterCore" type="Node2D" unique_id=1597098486]
+
+[node name="Walls" type="StaticBody2D" parent="." unique_id=1834366203]
+
+[node name="WallsLeft" type="CollisionShape2D" parent="Walls" unique_id=1844257338]
+position = Vector2(-529, 0)
+shape = SubResource("RectangleShape2D_ry8ac")
+
+[node name="WallsRight" type="CollisionShape2D" parent="Walls" unique_id=1563319174]
+position = Vector2(529, 0)
+shape = SubResource("RectangleShape2D_ry8ac")
+
+[node name="OuterCoreBackground" type="Sprite2D" parent="." unique_id=174864439]
+texture = ExtResource("1_6n6tf")

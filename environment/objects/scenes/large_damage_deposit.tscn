@@ -8,7 +8,7 @@ script = ExtResource("1_s5tsh")
 metadata/_custom_type_script = "uid://tcyp1ib2og8s"
 
 [node name="DepositCollision" type="CollisionPolygon2D" parent="." unique_id=1520236765]
-polygon = PackedVector2Array(-63, 4, -52, -9, -21, -71, -13, -78, -9, -78, 19, -62, 44, -42, 62, -16, 60, 15, 52, 64, 46, 77, 33, 78, -8, 61, -21, 54, -37, 40, -53, 32, -60, 16)
+polygon = PackedVector2Array(2, 63, -36, 37, -62, -43, -20, -62, 62, -45, 62, 3)
 
 [node name="DepositSprite" type="Sprite2D" parent="." unique_id=1622756469]
 texture = ExtResource("2_k2afp")

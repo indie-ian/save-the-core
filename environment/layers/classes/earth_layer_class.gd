@@ -20,7 +20,7 @@ const CRUST_FOREGROUND_TILES: String = "uid://co8rcfht5qxyy"
 
 # Variables for the tile map layer generation
 var layer_width: int
-var tile_size: Vector2i = Vector2i(8,8)
+var tile_size: Vector2i = Vector2i(16,16)
 var background_tile_texture: Texture2D
 var foreground_tile_texture: Texture2D
 var background_tile_set: TileSet
