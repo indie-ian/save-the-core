@@ -34,8 +34,19 @@ var shake_strength: float = 0.0
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var stats: Node2D = $stats
 
+@onready var damage_bar: TextureProgressBar = $stats/DamageBar
 
 var is_turbo_active: bool = false
+
+const MAX_DAMAGE: float = 100.0
+const DAMAGE_PER_HIT: float = 2.0 
+const DAMAGE_BREAKABLE: float = 0.5     
+const DAMAGE_UNBREAKABLE: float = 15.0  
+
+var current_damage: float = 0.0
+var hit_cooldown: float = 0.0
+var is_dashing: bool = false
+var danger_tween: Tween
 
 func _ready() -> void:
 	drill.body_entered.connect(_drill_area)
@@ -44,9 +55,14 @@ func _ready() -> void:
 	effects.hide()
 	max_charge_sprite.hide()
 	failed.hide()
+	#stats ui drill damage
+	damage_bar.max_value = MAX_DAMAGE
+	damage_bar.value = current_damage
 	
 
 func _physics_process(delta: float) -> void:
+	if hit_cooldown > 0:
+		hit_cooldown -= delta
 	var mouse_pos = get_global_mouse_position()
 	look_at(mouse_pos)
 	charge_ui.global_position = global_position + BAR_OFFSET
@@ -120,6 +136,22 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	
+	
+	if is_dashing:
+		# here we calculate how fast it was the dash
+		var actual_speed = get_real_velocity().length()
+		# here how fast should have been
+		var expected_speed = velocity.length()
+		
+		# if the actual speed was smaller than the expected the that mean it hit a wall and it will add some damage
+		if actual_speed < expected_speed * 0.3:
+			is_dashing = false
+			_apply_hard_hit()
+			
+		# if its normal we continue
+		elif expected_speed <= SPEED:
+			is_dashing = false
+	
 	if drill.has_overlapping_bodies():
 		for body in drill.get_overlapping_bodies():
 			if body is TileMapLayer:
@@ -130,20 +162,58 @@ func _launch(target_pos: Vector2, power: float) -> void:
 	is_charging = false
 	current_charge = 0.0
 	charge_ui.hide()
-	pointer.position.y = POINTER_START_Y 
+	pointer.position.y = POINTER_START_Y
+	if power > OVERCHARGE_SPEED:
+		is_dashing = true
 
 func _drill_area(body: Node2D) -> void:
-	if body.has_method("erase_cell"):
+	# ignore drill
+	if body == self:
+		return
+
+	# if it is breakable
+	if body is TileMapLayer and body.has_method("erase_cell") and not body.is_in_group("unbreakable"):
+		var broke_tile: bool = false
+		var hit_hard_tile: bool = false
+		
 		for x_pos in drill_area.x / 2:
 			for y_pos in drill_area.y / 2:
 				var q1: Vector2 = Vector2(drill.global_position.x - x_pos, drill.global_position.y - y_pos)
 				var q2: Vector2 = Vector2(drill.global_position.x + x_pos, drill.global_position.y + y_pos)
 				var q3: Vector2 = Vector2(drill.global_position.x - x_pos, drill.global_position.y + y_pos)
 				var q4: Vector2 = Vector2(drill.global_position.x + x_pos, drill.global_position.y - y_pos)
-				body.erase_cell(body.local_to_map(q1))
-				body.erase_cell(body.local_to_map(q2))
-				body.erase_cell(body.local_to_map(q3))
-				body.erase_cell(body.local_to_map(q4))
+				
+				for point in [q1, q2, q3, q4]:
+					var map_pos = body.local_to_map(point)
+					if body.get_cell_source_id(map_pos) != -1:
+						var tile_data = body.get_cell_tile_data(map_pos)
+						if tile_data and tile_data.get_custom_data("unbreakable") == true:
+							hit_hard_tile = true
+						else:
+							body.erase_cell(map_pos)
+							broke_tile = true
+							
+		if broke_tile:
+			_add_damage(DAMAGE_BREAKABLE)
+		if hit_hard_tile:
+			_apply_hard_hit()
+
+	# if it is not breakable
+	else:
+		_apply_hard_hit()
+
+func _apply_hard_hit() -> void:
+	if hit_cooldown <= 0:
+		_add_damage(DAMAGE_UNBREAKABLE)
+		hit_cooldown = 0.4 
+		velocity = -velocity * 0.4
+		animated_sprite.modulate = Color(1.0, 0.2, 0.2) 
+		var hit_tween = create_tween()
+		hit_tween.tween_property(animated_sprite, "modulate", Color.WHITE, 0.3)
+		shake_strength = 8.0
+
+
+
 
 func _trigger_sweet_spot_effects() -> void:
 	is_turbo_active = true
@@ -161,7 +231,7 @@ func _trigger_sweet_spot_effects() -> void:
 	tween.tween_callback(max_charge_sprite.hide)
 
 func _trigger_overcharge_effects() -> void:
-	animated_sprite.modulate = Color(1.0, 0.2, 0.2) # Έντονο κόκκινο
+	animated_sprite.modulate = Color(1.0, 0.2, 0.2) 
 	var color_tween = create_tween()
 	color_tween.tween_property(animated_sprite, "modulate", Color.WHITE, 0.6)
 	
@@ -174,3 +244,45 @@ func _trigger_overcharge_effects() -> void:
 	popup_tween.tween_interval(0.35)
 	popup_tween.tween_property(failed, "modulate:a", 0.0, 0.25)
 	popup_tween.tween_callback(failed.hide)
+
+
+
+
+func _add_damage(amount: float) -> void:
+	current_damage = clamp(current_damage + amount, 0.0, MAX_DAMAGE)
+	damage_bar.value = current_damage
+	
+	# if damage above 80% it start red party
+	if current_damage >= MAX_DAMAGE * 0.8:
+		_start_danger_pulse()
+	else:
+		_stop_danger_pulse()
+		if current_damage >= MAX_DAMAGE * 0.5:
+			damage_bar.modulate = Color.ORANGE
+		else:
+			damage_bar.modulate = Color.WHITE
+			
+	if current_damage >= MAX_DAMAGE:
+		print("DRILL BROKEN / MAX DAMAGE!")
+		# here we will add a game over
+		
+#red and shake alarm
+func _start_danger_pulse() -> void:
+	if danger_tween and danger_tween.is_valid():
+		return
+		
+	danger_tween = create_tween().set_loops() # repeat shake
+	
+	danger_tween.tween_property(stats, "scale", Vector2(1.02, 1.02), 0.25).set_trans(Tween.TRANS_SINE)
+	danger_tween.parallel().tween_property(stats, "modulate", Color(1.0, 0.25, 0.25), 0.25)
+	
+	danger_tween.tween_property(stats, "scale", Vector2(1.0, 1.0), 0.25).set_trans(Tween.TRANS_SINE)
+	danger_tween.parallel().tween_property(stats, "modulate", Color.WHITE, 0.12)
+
+func _stop_danger_pulse() -> void:
+	if danger_tween and danger_tween.is_valid():
+		danger_tween.kill()
+		
+	#back to normal state
+	stats.scale = Vector2(1.0, 1.0)
+	stats.modulate = Color.WHITE

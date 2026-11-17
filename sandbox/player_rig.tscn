@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://nanc8o61dub0" path="res://sandbox/playerAssets/MaxCharge.png" id="6_bjboh"]
 [ext_resource type="Texture2D" uid="uid://bdpw7yv0g4fno" path="res://sandbox/playerAssets/turbo.png" id="7_vnepr"]
 [ext_resource type="Texture2D" uid="uid://crevukiknk0qq" path="res://sandbox/playerAssets/statsAssets/DrillStatsInterfaces.png" id="8_bjboh"]
+[ext_resource type="Texture2D" uid="uid://b8f3rmtkkt5ra" path="res://sandbox/playerAssets/statsAssets/DamageProgressBar.png" id="9_vnepr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x78j1"]
 atlas = ExtResource("2_8q8w8")
@@ -147,7 +148,7 @@ rotation = -1.5707964
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_gj5rp")
 autoplay = "default"
-frame_progress = 0.47561592
+frame_progress = 0.7402897
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2084035184]
 position = Vector2(-4, 0)
@@ -190,9 +191,17 @@ scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_m3xxw")
 animation = &"turbo"
 
-[node name="stats" type="Node2D" parent="." unique_id=268885794]
+[node name="stats" type="Node2D" parent="." unique_id=623327462]
 
-[node name="Sprite2D" type="Sprite2D" parent="stats" unique_id=1105692902]
-position = Vector2(-191, -87)
-scale = Vector2(1.2, 1.2)
+[node name="Sprite2D" type="Sprite2D" parent="stats" unique_id=2063136205]
+position = Vector2(-197, -93)
 texture = ExtResource("8_bjboh")
+
+[node name="DamageBar" type="TextureProgressBar" parent="stats" unique_id=769456193]
+offset_left = -211.5
+offset_top = -111.5
+offset_right = -171.5
+offset_bottom = -71.5
+value = 100.0
+fill_mode = 3
+texture_progress = ExtResource("9_vnepr")
