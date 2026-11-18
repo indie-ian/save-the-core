@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://ck7u0luavxl6g" path="res://ui/menus/credits/credits.gd" id="1_h1tht"]
 [ext_resource type="Theme" uid="uid://cfr3f6n5orvpt" path="res://ui/menus/themes/menu_theme.tres" id="1_qjml7"]
+[ext_resource type="Texture2D" uid="uid://t152hmm58dyb" path="res://ui/menus/options/background2.png" id="2_4dwoy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gj5rp"]
+texture = ExtResource("2_4dwoy")
 
 [node name="Credits" type="Control" unique_id=1138913588]
 layout_mode = 3
@@ -12,23 +16,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h1tht")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1792223589]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.4, 0.64705884, 0.4509804, 1)
+[node name="Panel" type="Panel" parent="." unique_id=579692828]
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 540.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_gj5rp")
 
 [node name="TitleMargin" type="MarginContainer" parent="." unique_id=192622886]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+offset_left = -81.0
+offset_right = 81.0
+offset_bottom = 152.0
 grow_horizontal = 2
 theme_override_constants/margin_top = 32
 
@@ -47,12 +48,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
+offset_left = -47.5
+offset_top = -59.0
+offset_right = 47.5
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_bottom = 32
+metadata/_edit_use_anchors_ = true
 
 [node name="MainButton" type="Button" parent="ButtonMargin" unique_id=397491141]
 layout_mode = 2

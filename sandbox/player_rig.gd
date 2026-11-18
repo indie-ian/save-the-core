@@ -16,10 +16,7 @@ const BAR_OFFSET = Vector2(0, -45)
 const POINTER_START_Y = -25.0 
 const POINTER_END_Y = -70.0    
 
-const MAX_LIQUID: float = 100.0
-const LIQUID_LOSS_OVERCHARGE: float = 25.0  # liquid Overcharge loss
-const LIQUID_LOSS_WEAK_CHARGE: float = 15.0 # if you let mouse to early liquid loss 60%
-var current_liquid: float = MAX_LIQUID
+
 
 var drill_area: Vector2 = Vector2(24, 24)
 var is_charging: bool = false
@@ -45,9 +42,44 @@ var shake_strength: float = 0.0
 @onready var redlight: Sprite2D = $stats/redlight
 
 @onready var liquid: TextureProgressBar = $stats/liquid
+@onready var coolingtubes: AnimatedSprite2D = $stats/coolingtubes
+@onready var green_pointer: Sprite2D = $stats/clockgreen/greenPointer
+@onready var clockred: Sprite2D = $stats/clockred
+@onready var red_pointer: Sprite2D = $stats/clockred/redPointer
+@onready var clockgreen: Sprite2D = $stats/clockgreen
+
+#for temperature
+#how cooling works
+#when you overcharge temperature goes up for the top clock
+#when you hit a wall temperature goes up for the bottom clock
+#how cooling tubes work
+#by default it cools the bottom clock so every time you hit some liquid leaves
+#to switch the tubes you hover the switch and press a
+#then it cools the top clok
+#if you change anything be carefull it work by prayers and pure luck
+
+const MAX_TEMP_DEGREES: float = 350.0 # max turn
+const WARNING_DEGREES: float = 260.0  # blink effect trigger
+const COOL_DROP_DEGREES: float = 80.0 # rotation 
+const COOL_LIQUID_COST: float = 15.0  # liquid from cooling
+
+const MAX_LIQUID: float = 100.0
+const LIQUID_LOSS_OVERCHARGE: float = 5.0  # liquid Overcharge loss
+const LIQUID_LOSS_WEAK_CHARGE: float = 2.5 # if you let mouse to early liquid loss 60%
+var current_liquid: float = MAX_LIQUID
+const LIQUID_PER_DEGREE: float = 0.25
+
+var green_temp_deg: float = 0.0
+var red_temp_deg: float = 0.0
+
+var green_warn_tween: Tween
+var red_warn_tween: Tween
+
+
 
 #for the light switch
 var is_switching: bool = false
+var is_mouse_on_switch: bool = false
 
 var is_turbo_active: bool = false
 
@@ -81,7 +113,9 @@ func _ready() -> void:
 	
 	#lights and switch to indicate the part you are cooling by default it cools the engine
 	#so thats why only the green light is on
-	redlight.hide()
+	redlight.show()
+	green_light.hide()
+	coolingtubes.play("coolingRed")
 	
 	#liquid bar
 	liquid.max_value = MAX_LIQUID
@@ -90,6 +124,9 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	if is_mouse_on_switch and Input.is_action_just_pressed("coolingbutton"):
+		_toggle_cooling_switch()
+	
 	if hit_cooldown > 0:
 		hit_cooldown -= delta
 	var mouse_pos = get_global_mouse_position()
@@ -135,7 +172,7 @@ func _physics_process(delta: float) -> void:
 				overcharged = true
 				_trigger_overcharge_effects()
 				print("OVERCHARGED")
-				_consume_liquid(LIQUID_LOSS_OVERCHARGE)
+				_add_green_temp(20.0) 
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			
@@ -159,7 +196,7 @@ func _physics_process(delta: float) -> void:
 					_consume_liquid(LIQUID_LOSS_WEAK_CHARGE)
 			_launch(mouse_pos, launch_power)
 			
-		elif Input.is_action_pressed("ui_up"):
+		elif Input.is_action_pressed("ui_up") || Input.is_action_pressed("slowMoveForward"):
 			velocity = global_position.direction_to(mouse_pos) * SPEED
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -228,6 +265,7 @@ func _drill_area(body: Node2D) -> void:
 							
 		if broke_tile:
 			_add_damage(DAMAGE_BREAKABLE)
+			_add_red_temp(5.0)
 		if hit_hard_tile:
 			_apply_hard_hit()
 
@@ -235,8 +273,10 @@ func _drill_area(body: Node2D) -> void:
 	else:
 		_apply_hard_hit()
 
+
 func _apply_hard_hit() -> void:
 	if hit_cooldown <= 0:
+		_add_red_temp(20.0)
 		_add_damage(DAMAGE_UNBREAKABLE)
 		hit_cooldown = 0.4 
 		velocity = -velocity * 0.4
@@ -319,31 +359,131 @@ func _stop_danger_pulse() -> void:
 	stats.modulate = Color.WHITE
 
 
-# when the mouse enters the area switch change 
 func _on_area_2d_mouse_entered() -> void:
+	is_mouse_on_switch = true
+
+func _on_area_2d_mouse_exited() -> void:
+	is_mouse_on_switch = false
+
+
+	
+func _consume_liquid(amount: float) -> void:
+	current_liquid = clamp(current_liquid - amount, 0.0, MAX_LIQUID)
+	var bar_tween = create_tween()
+	bar_tween.tween_property(liquid, "value", current_liquid, 0.5).set_trans(Tween.TRANS_SINE)
+	
+	if amount >= 5.0:
+		liquid.modulate = Color(1.0, 0.3, 0.3)
+		bar_tween.parallel().tween_property(liquid, "modulate", Color.WHITE, 0.5)
+		
+	if current_liquid <= 0:
+		print("no liquid")
+
+
+func _add_green_temp(degrees: float) -> void:
+	if degrees < 0:
+		green_temp_deg = clamp(green_temp_deg + degrees, 0.0, MAX_TEMP_DEGREES)
+		_update_green_needle()
+		return
+
+	if not redlight.visible and current_liquid > 0:
+		_consume_liquid(LIQUID_LOSS_OVERCHARGE) 
+		return
+		
+	green_temp_deg = clamp(green_temp_deg + degrees, 0.0, MAX_TEMP_DEGREES)
+	_update_green_needle()
+
+func _add_red_temp(degrees: float) -> void:
+	if degrees < 0:
+		red_temp_deg = clamp(red_temp_deg + degrees, 0.0, MAX_TEMP_DEGREES)
+		_update_red_needle()
+		return
+
+	if redlight.visible and current_liquid > 0:
+		_consume_liquid(LIQUID_LOSS_WEAK_CHARGE) 
+		return
+		
+	red_temp_deg = clamp(red_temp_deg + degrees, 0.0, MAX_TEMP_DEGREES)
+	_update_red_needle()
+
+# blinkssss
+func _start_clock_warning(clock_sprite: Sprite2D, is_green: bool) -> void:
+	if is_green:
+		if green_warn_tween and green_warn_tween.is_valid():
+			return
+		green_warn_tween = create_tween().set_loops()
+		green_warn_tween.tween_property(clock_sprite, "modulate", Color(1.0, 0.2, 0.2), 0.2)
+		green_warn_tween.tween_property(clock_sprite, "modulate", Color.WHITE, 0.2)
+	else:
+		if red_warn_tween and red_warn_tween.is_valid():
+			return
+		red_warn_tween = create_tween().set_loops()
+		red_warn_tween.tween_property(clock_sprite, "modulate", Color(1.0, 0.2, 0.2), 0.2)
+		red_warn_tween.tween_property(clock_sprite, "modulate", Color.WHITE, 0.2)
+
+func _stop_clock_warning(clock_sprite: Sprite2D, is_green: bool) -> void:
+	if is_green and green_warn_tween and green_warn_tween.is_valid():
+		green_warn_tween.kill()
+	elif not is_green and red_warn_tween and red_warn_tween.is_valid():
+		red_warn_tween.kill()
+	clock_sprite.modulate = Color.WHITE
+
+func _toggle_cooling_switch() -> void:
 	if is_switching:
 		return	
 	is_switching = true
+	
 	if not redlight.visible:
 		switch.play("GreenToRed")
 		await switch.animation_finished
 		redlight.show()
 		green_light.hide()
+		
+		if red_temp_deg > 0 and current_liquid > 0:
+			var needed_liquid: float = red_temp_deg * LIQUID_PER_DEGREE
+			var liquid_used: float = min(current_liquid, needed_liquid)
+			var degrees_cooled: float = liquid_used / LIQUID_PER_DEGREE
+			
+			_consume_liquid(liquid_used)
+			_add_red_temp(-degrees_cooled) 
+			
+		coolingtubes.play("coolswitchRed")
+		await coolingtubes.animation_finished
+		coolingtubes.play("coolingRed")
 	else:
 		switch.play("redToGreen")
 		await switch.animation_finished
 		green_light.show()
 		redlight.hide()
+		
+		if green_temp_deg > 0 and current_liquid > 0:
+			var needed_liquid: float = green_temp_deg * LIQUID_PER_DEGREE
+			var liquid_used: float = min(current_liquid, needed_liquid)
+			var degrees_cooled: float = liquid_used / LIQUID_PER_DEGREE
+			
+			_consume_liquid(liquid_used)
+			_add_green_temp(-degrees_cooled) 
+			
+		coolingtubes.play("coolingswitchGreen")
+		await coolingtubes.animation_finished
+		coolingtubes.play("coolingGreen")
+		
 	is_switching = false
 	
-func _consume_liquid(amount: float) -> void:
-	current_liquid = clamp(current_liquid - amount, 0.0, MAX_LIQUID)
-	liquid.value = current_liquid
+func _update_green_needle() -> void:
+	var rot_tween = create_tween()
+	rot_tween.tween_property(green_pointer, "rotation_degrees", green_temp_deg, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	
-	if amount >= 5.0:
-		liquid.modulate = Color(1.0, 0.3, 0.3)
-		var bar_tween = create_tween()
-		bar_tween.tween_property(liquid, "modulate", Color.WHITE, 0.35)
-		
-	if current_liquid <= 0:
-		print("no liquid")
+	if green_temp_deg > WARNING_DEGREES:
+		_start_clock_warning(clockgreen, true)
+	else:
+		_stop_clock_warning(clockgreen, true)
+
+func _update_red_needle() -> void:
+	var rot_tween = create_tween()
+	rot_tween.tween_property(red_pointer, "rotation_degrees", red_temp_deg, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	
+	if red_temp_deg > WARNING_DEGREES:
+		_start_clock_warning(clockred, false)
+	else:
+		_stop_clock_warning(clockred, false)
