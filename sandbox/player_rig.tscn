@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://dpcki1p71xvke" path="res://sandbox/playerAssets/statsAssets/CoolingLiquidBar.png" id="13_nnfea"]
 [ext_resource type="Texture2D" uid="uid://c3q82xrr5qciq" path="res://sandbox/playerAssets/statsAssets/coolingtubes.png" id="15_6vcae"]
 [ext_resource type="Texture2D" uid="uid://r2w0xydm55yu" path="res://sandbox/playerAssets/statsAssets/effectcycle.png" id="15_mxduk"]
+[ext_resource type="Texture2D" uid="uid://cxiabdxqa2gr1" path="res://sandbox/playerAssets/ReleaseAssets/chargingDash.png" id="17_4h10s"]
+[ext_resource type="Texture2D" uid="uid://mu00iu1mds5w" path="res://sandbox/playerAssets/ReleaseAssets/chargingDahBar.png" id="18_ddewd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x78j1"]
 atlas = ExtResource("2_8q8w8")
@@ -363,11 +365,11 @@ texture = ExtResource("4_4235s")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1400992302]
 
 [node name="failed" type="Sprite2D" parent="." unique_id=1354886270]
-position = Vector2(21.5, -69)
+position = Vector2(-1, 66)
 texture = ExtResource("5_1uke2")
 
 [node name="maxcharge" type="Sprite2D" parent="." unique_id=805020235]
-position = Vector2(21.5, -69)
+position = Vector2(-0.5, 66.5)
 texture = ExtResource("6_bjboh")
 
 [node name="effects" type="AnimatedSprite2D" parent="." unique_id=885187738]
@@ -458,6 +460,19 @@ position = Vector2(-0.4897995, -1.1428578)
 scale = Vector2(0.9795916, 0.97959185)
 texture = ExtResource("9_1dp3n")
 offset = Vector2(0, 2)
+
+[node name="DashCoolDown" type="Sprite2D" parent="stats" unique_id=1280591598]
+position = Vector2(-80.916664, -7.833335)
+scale = Vector2(0.9949496, 0.97619045)
+texture = ExtResource("17_4h10s")
+
+[node name="timerDash" type="TextureProgressBar" parent="stats" unique_id=989317733]
+offset_left = -97.00001
+offset_top = -14.166664
+offset_right = -52.66667
+offset_bottom = -1.4999962
+value = 100.0
+texture_progress = ExtResource("18_ddewd")
 
 [connection signal="mouse_entered" from="stats/Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="stats/Area2D" to="." method="_on_area_2d_mouse_exited"]

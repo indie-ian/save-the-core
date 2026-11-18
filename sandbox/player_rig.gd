@@ -48,6 +48,10 @@ var shake_strength: float = 0.0
 @onready var red_pointer: Sprite2D = $stats/clockred/redPointer
 @onready var clockgreen: Sprite2D = $stats/clockgreen
 
+@onready var dash_cool_down: Sprite2D = $stats/DashCoolDown
+@onready var timer_dash: TextureProgressBar = $stats/timerDash
+
+
 #for temperature
 #how cooling works
 #when you overcharge temperature goes up for the top clock
@@ -95,6 +99,17 @@ var danger_tween: Tween
 var stats_offset: Vector2
 var initial_stats_scale: Vector2
 
+#dash cooldown
+#how it works
+#when you do a sweet spot no dash cooldown
+#when you overcharge you get 3 seconds cooldown
+#when you do ealy it calculates the cooldown like this 
+# cooldown = 3 - complition of bar% so the closer u are to sweet spot less panishment
+const MAX_DASH_COOLDOWN: float = 3.0
+
+var dash_cooldown_timer: float = 0.0
+var dash_cooldown_max: float = 0.0
+
 
 func _ready() -> void:
 	drill.body_entered.connect(_drill_area)
@@ -122,6 +137,17 @@ func _ready() -> void:
 	liquid.step = 0.01 
 	liquid.value = current_liquid
 	
+	
+	timer_dash.max_value = 100.0
+	timer_dash.step = 0.01
+	timer_dash.value = 0 
+	
+	timer_dash.max_value = 100.0
+	timer_dash.step = 0.01
+	timer_dash.value = 0
+	dash_cool_down.hide()
+	timer_dash.hide()
+	
 
 func _physics_process(delta: float) -> void:
 	if is_mouse_on_switch and Input.is_action_just_pressed("coolingbutton"):
@@ -140,6 +166,14 @@ func _physics_process(delta: float) -> void:
 	stats.global_position = global_position + stats_offset
 	stats.global_rotation = 0.0
 	
+	if dash_cooldown_timer > 0.0:
+		dash_cooldown_timer = max(0.0, dash_cooldown_timer - delta)
+		var progress_ratio: float = 1.0 - (dash_cooldown_timer / dash_cooldown_max)
+		timer_dash.value = progress_ratio * 100.0
+		
+		if dash_cooldown_timer <= 0.0:
+			timer_dash.value = 100.0
+			_hide_dash_cooldown_ui()
 	
 	if max_charge_sprite.visible:
 		max_charge_sprite.global_position = global_position + Vector2(0, -65)
@@ -150,7 +184,7 @@ func _physics_process(delta: float) -> void:
 		effects.stop()
 		effects.hide()
 	
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and (dash_cooldown_timer <= 0.0 or is_charging or overcharged):
 		if not overcharged:
 			is_charging = true
 			charge_ui.show() 
@@ -171,8 +205,8 @@ func _physics_process(delta: float) -> void:
 				_launch(mouse_pos, OVERCHARGE_SPEED)
 				overcharged = true
 				_trigger_overcharge_effects()
-				print("OVERCHARGED")
-				_add_green_temp(20.0) 
+				_add_green_temp(20.0)
+				_start_dash_cooldown(MAX_DASH_COOLDOWN) 
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			
@@ -185,16 +219,21 @@ func _physics_process(delta: float) -> void:
 			
 			if charge_ratio >= SWEET_SPOT_MIN and charge_ratio <= SWEET_SPOT_MAX:
 				launch_power = SWEET_SPOT_SPEED
-				shake_strength = 20 #maximum shake when you achieve max charge
+				shake_strength = 20
 				_trigger_sweet_spot_effects()
+				_start_dash_cooldown(0.0) 
 			else:
 				launch_power = lerp(MIN_LAUNCH_SPEED, MAX_LAUNCH_SPEED, charge_ratio)
-				shake_strength = 10 #small shake when you do smaller charge
-				if charge_ratio >= 0.60:
-					pass
-				else:
+				shake_strength = 10
+				
+				var completion_percent: float = clamp(charge_ratio / SWEET_SPOT_MIN, 0.0, 1.0)
+				var calculated_cooldown: float = MAX_DASH_COOLDOWN * (1.0 - completion_percent)
+				_start_dash_cooldown(calculated_cooldown)
+				
+				if charge_ratio < 0.60:
 					_consume_liquid(LIQUID_LOSS_WEAK_CHARGE)
-			_launch(mouse_pos, launch_power)
+			
+			_launch(mouse_pos, launch_power) 
 			
 		elif Input.is_action_pressed("ui_up") || Input.is_action_pressed("slowMoveForward"):
 			velocity = global_position.direction_to(mouse_pos) * SPEED
@@ -487,3 +526,45 @@ func _update_red_needle() -> void:
 		_start_clock_warning(clockred, false)
 	else:
 		_stop_clock_warning(clockred, false)
+		
+
+
+func _start_dash_cooldown(duration: float) -> void:
+	if duration <= 0.05:
+		dash_cooldown_timer = 0.0
+		dash_cooldown_max = 0.0
+		dash_cool_down.hide()
+		timer_dash.hide()
+		return
+		
+	dash_cooldown_max = duration
+	dash_cooldown_timer = duration
+	timer_dash.value = 0.0
+	_show_dash_cooldown_ui()
+
+func _show_dash_cooldown_ui() -> void:
+	dash_cool_down.show()
+	timer_dash.show()
+	
+	# Pop charge dash
+	dash_cool_down.scale = Vector2(0.3, 0.3)
+	timer_dash.scale = Vector2(0.3, 0.3)
+	dash_cool_down.modulate.a = 1.0
+	timer_dash.modulate.a = 1.0
+	
+	var pop_tween = create_tween().set_parallel(true)
+	pop_tween.tween_property(dash_cool_down, "scale", Vector2.ONE, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	pop_tween.tween_property(timer_dash, "scale", Vector2.ONE, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+func _hide_dash_cooldown_ui() -> void:
+	# fade charge dash
+	var hide_tween = create_tween().set_parallel(true)
+	hide_tween.tween_property(dash_cool_down, "scale", Vector2(1.2, 1.2), 0.15)
+	hide_tween.tween_property(timer_dash, "scale", Vector2(1.2, 1.2), 0.15)
+	hide_tween.tween_property(dash_cool_down, "modulate:a", 0.0, 0.15)
+	hide_tween.tween_property(timer_dash, "modulate:a", 0.0, 0.15)
+	
+	hide_tween.chain().tween_callback(func():
+		dash_cool_down.hide()
+		timer_dash.hide()
+	)
