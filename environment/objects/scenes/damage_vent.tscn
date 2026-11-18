@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cjx7fisype2j3"]
+
+[ext_resource type="Script" uid="uid://dh2l1qb4d4gq" path="res://environment/objects/scripts/damage_vent.gd" id="1_7432d"]
+[ext_resource type="Texture2D" uid="uid://ce2av00ovwl0v" path="res://environment/objects/sprites/damage_vent.png" id="1_tlyf6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ry8ac"]
+
+[node name="DamageVent" type="Node2D" unique_id=732388775]
+script = ExtResource("1_7432d")
+
+[node name="DamageDeposits" type="Node2D" parent="." unique_id=1691305863]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1249251356]
+texture = ExtResource("1_tlyf6")
+
+[node name="SpawnMarker" type="Marker2D" parent="." unique_id=855645726]
+position = Vector2(146, 0)
+
+[node name="Despawn" type="Area2D" parent="." unique_id=1481152848]
+position = Vector2(-220, 0)
+
+[node name="DespawnCollision" type="CollisionShape2D" parent="Despawn" unique_id=673493549]
+shape = SubResource("CircleShape2D_ry8ac")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=348974029]
+one_shot = true
+autostart = true

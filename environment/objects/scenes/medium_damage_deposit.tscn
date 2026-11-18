@@ -9,7 +9,7 @@ size_type = 1
 metadata/_custom_type_script = "uid://tcyp1ib2og8s"
 
 [node name="DepositCollision" type="CollisionPolygon2D" parent="." unique_id=729463131]
-polygon = PackedVector2Array(-46, -16, -42, -24, -15, -46, 4, -45, 26, -40, 31, -33, 46, 8, 44, 15, 25, 31, 21, 35, -5, 46, -12, 45, -24, 40, -36, 31, -43, 24)
+polygon = PackedVector2Array(-47, 1, 17, -46, 47, -3, 47, 13, 25, 47)
 
 [node name="DepositSprite" type="Sprite2D" parent="." unique_id=1390397817]
 texture = ExtResource("2_f7cok")

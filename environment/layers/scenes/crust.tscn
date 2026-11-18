@@ -2,6 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://rl4udxkhoueb" path="res://environment/layers/sprites/crust.png" id="1_gyvlf"]
 [ext_resource type="PackedScene" uid="uid://dxcygfhn4d26s" path="res://environment/objects/scenes/large_damage_deposit.tscn" id="2_3mo7g"]
+[ext_resource type="PackedScene" uid="uid://d4efd2wuk8jyh" path="res://environment/objects/scenes/medium_damage_deposit.tscn" id="3_2kujl"]
+[ext_resource type="PackedScene" uid="uid://eka4lmkl2k3a" path="res://environment/objects/scenes/small_damage_deposit.tscn" id="4_nb6le"]
+[ext_resource type="PackedScene" uid="uid://uqe3lnjhvr36" path="res://environment/objects/scenes/breakable_wall.tscn" id="5_nb6le"]
 
 [node name="Crust" type="Node2D" unique_id=1719055717]
 
@@ -42,3 +45,51 @@ rotation = 1.5707964
 
 [node name="LargeDamageDeposit6" parent="DamageDeposits" unique_id=861381735 instance=ExtResource("2_3mo7g")]
 position = Vector2(305, 1006)
+
+[node name="MediumDamageDeposit" parent="DamageDeposits" unique_id=129860413 instance=ExtResource("3_2kujl")]
+position = Vector2(122.000015, 482.00006)
+rotation = 0.7853982
+
+[node name="MediumDamageDeposit4" parent="DamageDeposits" unique_id=441778849 instance=ExtResource("3_2kujl")]
+position = Vector2(-276, -1224)
+rotation = 3.1415927
+
+[node name="MediumDamageDeposit2" parent="DamageDeposits" unique_id=489445156 instance=ExtResource("3_2kujl")]
+position = Vector2(-105, -448)
+rotation = 1.5707964
+
+[node name="MediumDamageDeposit3" parent="DamageDeposits" unique_id=1801566857 instance=ExtResource("3_2kujl")]
+position = Vector2(102.999985, -627)
+rotation = 0.7853982
+
+[node name="SmallDamageDeposit" parent="DamageDeposits" unique_id=2143115054 instance=ExtResource("4_nb6le")]
+position = Vector2(-291, -739)
+
+[node name="SmallDamageDeposit5" parent="DamageDeposits" unique_id=2106778660 instance=ExtResource("4_nb6le")]
+position = Vector2(-273, -1313)
+rotation = 0.7853982
+
+[node name="SmallDamageDeposit2" parent="DamageDeposits" unique_id=306075401 instance=ExtResource("4_nb6le")]
+position = Vector2(327, -906)
+
+[node name="SmallDamageDeposit3" parent="DamageDeposits" unique_id=1360516861 instance=ExtResource("4_nb6le")]
+position = Vector2(105.000015, -208.00002)
+rotation = 0.7853982
+
+[node name="SmallDamageDeposit4" parent="DamageDeposits" unique_id=645221648 instance=ExtResource("4_nb6le")]
+position = Vector2(-160, 668)
+rotation = -1.5707964
+
+[node name="LargeDamageDeposit7" parent="DamageDeposits" unique_id=1637153109 instance=ExtResource("2_3mo7g")]
+position = Vector2(45, -1239)
+
+[node name="Breakables" type="Node2D" parent="." unique_id=2141677797]
+
+[node name="BreakableWall" parent="Breakables" unique_id=1283645610 instance=ExtResource("5_nb6le")]
+position = Vector2(2, -38)
+
+[node name="BreakableWall2" parent="Breakables" unique_id=2052757246 instance=ExtResource("5_nb6le")]
+position = Vector2(292, 214)
+
+[node name="BreakableWall3" parent="Breakables" unique_id=1856379315 instance=ExtResource("5_nb6le")]
+position = Vector2(-295, 440)

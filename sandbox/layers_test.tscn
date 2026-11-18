@@ -21,4 +21,4 @@ position = Vector2(480, 8100)
 position = Vector2(480, 11340)
 
 [node name="RigidBody2D" parent="." unique_id=945059762 instance=ExtResource("2_la80o")]
-position = Vector2(480, 216)
+position = Vector2(434, 200)

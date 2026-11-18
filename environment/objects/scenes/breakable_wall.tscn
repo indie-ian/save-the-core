@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://uqe3lnjhvr36"]
+
+[ext_resource type="Texture2D" uid="uid://c0hk11c8wkp3w" path="res://environment/objects/sprites/breakable_wall.png" id="1_8alta"]
+[ext_resource type="Script" uid="uid://b67dl8bh5l8ow" path="res://environment/objects/scripts/breakable_wall.gd" id="1_wiskw"]
+
+[sub_resource type="Gradient" id="Gradient_ry8ac"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.537037)
+colors = PackedColorArray(0.22352941, 0.08627451, 0.2, 1, 0.31764707, 0.14509805, 0.19215687, 1)
+
+[node name="BreakableWall" type="StaticBody2D" unique_id=1283645610 groups=["breakable"]]
+script = ExtResource("1_wiskw")
+
+[node name="WallCollision" type="CollisionPolygon2D" parent="." unique_id=118742999]
+polygon = PackedVector2Array(-95, -17, -81, -8, -45, -18, -8, -13, 28, -27, 73, -11, 86, -13, 95, -19, 95, 24, 84, 19, 55, 17, -5, 26, -45, 19, -75, 21, -90, 25, -95, 27)
+
+[node name="WallSprite" type="Sprite2D" parent="." unique_id=1294508146]
+texture = ExtResource("1_8alta")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=759606214]
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 0.41
+emission_shape = 3
+emission_rect_extents = Vector2(80, 32)
+spread = 180.0
+gravity = Vector2(0, 50)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+angle_max = 360.0
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+color_ramp = SubResource("Gradient_ry8ac")
