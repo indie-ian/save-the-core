@@ -146,13 +146,3 @@ theme_override_font_sizes/font_size = 50
 text = "GAME TITLE"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Button" type="Button" parent="." unique_id=1431242473]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 240.0
-offset_right = 368.0
-offset_bottom = 448.0
-text = "test button"
-
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

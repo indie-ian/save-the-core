@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://ykrgrxyf58rm"]
+
+[ext_resource type="Theme" uid="uid://cfr3f6n5orvpt" path="res://ui/menus/themes/menu_theme.tres" id="1_104xa"]
+[ext_resource type="Texture2D" uid="uid://t152hmm58dyb" path="res://ui/menus/options/background2.png" id="1_tkdws"]
+[ext_resource type="PackedScene" uid="uid://dgq7fcsrd2bs0" path="res://sandbox/player_rig.tscn" id="2_8pb1l"]
+[ext_resource type="Script" uid="uid://6aittiu81njq" path="res://ui/tutorial/tutorial.gd" id="2_xip1d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gj5rp"]
+bg_color = Color(0.11372549, 0.050980393, 0.16862746, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gj5rp"]
+texture = ExtResource("1_tkdws")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gj5rp"]
+size = Vector2(69, 559)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3xxw"]
+size = Vector2(1093, 79)
+
+[node name="Node2D" type="Control" unique_id=1878776274]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_104xa")
+script = ExtResource("2_xip1d")
+
+[node name="Panel2" type="Panel" parent="." unique_id=17570888]
+layout_mode = 0
+offset_left = -479.0
+offset_top = -322.0
+offset_right = 1542.0
+offset_bottom = 937.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gj5rp")
+
+[node name="Panel" type="Panel" parent="." unique_id=1557360845]
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 540.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_gj5rp")
+
+[node name="Label" type="Label" parent="." unique_id=41048137]
+layout_mode = 0
+offset_left = 529.0
+offset_top = 60.0
+offset_right = 899.0
+offset_bottom = 279.0
+theme_override_font_sizes/font_size = 20
+text = "How to Dig
+Use your mouse to steer.
+Right-click to charge your drill.
+Left-click to move slowly. 
+(Tip Use it to cancel a charge 
+before you collide with a wall.)"
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="." unique_id=1218169341]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 246.0
+offset_right = 944.0
+offset_bottom = 502.0
+theme_override_font_sizes/font_size = 20
+text = "
+Damage: Occurs when you collide with walls.
+Overheat, the temperature rises:
+on the top gauge (Engine):overcharge your drill
+on the bottom gauge (Drill): dig or hit a wall
+Coolant (Liquid Bar): You can use this to cool either the engine or the drill. 
+Hover over the switch with your mouse and press the A button."
+
+[node name="RigidBody2D" parent="." unique_id=945059762 instance=ExtResource("2_8pb1l")]
+position = Vector2(481.00003, 271)
+scale = Vector2(1.5, 1.5)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1891602019]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1281734696]
+position = Vector2(-32, 279)
+shape = SubResource("RectangleShape2D_gj5rp")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=794672429]
+position = Vector2(994.5, 278)
+shape = SubResource("RectangleShape2D_gj5rp")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=2058855462]
+position = Vector2(481.5, -40.5)
+shape = SubResource("RectangleShape2D_m3xxw")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1993725536]
+position = Vector2(481, 581)
+shape = SubResource("RectangleShape2D_m3xxw")
+
+[node name="start" type="Button" parent="." unique_id=1368986721]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 472.0
+offset_right = 558.0
+offset_bottom = 512.0
+text = "PLAY"
+
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
