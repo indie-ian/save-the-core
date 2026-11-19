@@ -14,4 +14,6 @@ const MAIN_MENU_SCENE: String = "uid://uu71xp4cia35"
 const OPTIONS_SCENE: String = "uid://dihhhs4atxs2v"
 const CREDITS_SCENE: String = "uid://camkq2dhxi78"
 const TUTORIAL_SCENE: String = "uid://ykrgrxyf58rm"
+const GAME: String = "uid://cmwylb2fgsg7n"
+const GAME_OVER_SCENE: String = "uid://b7583w60ia177"
 #endregion

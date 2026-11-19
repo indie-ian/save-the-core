@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://b7583w60ia177"]
+
+[ext_resource type="Texture2D" uid="uid://t152hmm58dyb" path="res://ui/menus/options/background2.png" id="1_nq8qp"]
+[ext_resource type="Script" uid="uid://kk06ihmcdkuf" path="res://ui/menus/GameOver/game_over.gd" id="1_tjj4k"]
+[ext_resource type="Theme" uid="uid://cfr3f6n5orvpt" path="res://ui/menus/themes/menu_theme.tres" id="2_tjj4k"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7b8qr"]
+texture = ExtResource("1_nq8qp")
+
+[node name="Control" type="Control" unique_id=1612976632]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tjj4k")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1538318921]
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1734307336]
+offset_right = 960.0
+offset_bottom = 540.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_7b8qr")
+
+[node name="TitleMargin" type="MarginContainer" parent="CanvasLayer" unique_id=1821197016]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -103.5
+offset_right = 103.5
+offset_bottom = 152.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 32
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/TitleMargin" unique_id=1013304371]
+layout_mode = 2
+theme = ExtResource("2_tjj4k")
+theme_type_variation = &"TitleTextLabel"
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="text" type="Label" parent="CanvasLayer" unique_id=1834786504]
+offset_left = 128.0
+offset_top = 144.0
+offset_right = 842.0
+offset_bottom = 396.0
+theme = ExtResource("2_tjj4k")
+theme_type_variation = &"TitleTextLabel"
+text = "You're dead af.
+You didn't make the Earth spin,
+and now not even your drill spins.
+Wanna try again?
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainButton" type="Button" parent="CanvasLayer" unique_id=1958446181]
+offset_left = 584.0
+offset_top = 384.0
+offset_right = 679.0
+offset_bottom = 411.0
+theme = ExtResource("2_tjj4k")
+text = "MAIN MENU"
+
+[node name="Retry" type="Button" parent="CanvasLayer" unique_id=1076890998]
+offset_left = 344.0
+offset_top = 384.0
+offset_right = 439.0
+offset_bottom = 411.0
+theme = ExtResource("2_tjj4k")
+text = "Retry
+"

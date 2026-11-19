@@ -6,6 +6,7 @@ extends Control
 @onready var exit_button: Button = $ButtonVBox/ExitButton
 
 func _ready() -> void:
+	get_tree().paused = false
 	#start_button.pressed.connect(_start_game.bind(Library.MAIN_MENU_SCENE))
 	start_button.pressed.connect(_start_game.bind(Library.TUTORIAL_SCENE))
 	options_button.pressed.connect(_change_menu.bind(Library.OPTIONS_SCENE))

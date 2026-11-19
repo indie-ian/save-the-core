@@ -58,7 +58,7 @@ var shake_strength: float = 0.0
 #by default it cools the bottom clock so every time you hit some liquid leaves
 #to switch the tubes you hover the switch and press a
 #then it cools the top clok
-#if you change anything be carefull it work by prayers and pure luck
+#if you change anything be carefull it works by prayers and pure luck
 
 const MAX_TEMP_DEGREES: float = 350.0 # max turn
 const WARNING_DEGREES: float = 260.0  # blink effect trigger
@@ -76,7 +76,7 @@ var red_temp_deg: float = 0.0
 
 var green_warn_tween: Tween
 var red_warn_tween: Tween
-
+var is_dead: bool = false
 
 
 #for the light switch
@@ -344,10 +344,13 @@ func _add_damage(amount: float) -> void:
 		else:
 			damage_bar.modulate = Color.WHITE
 			
-	if current_damage >= MAX_DAMAGE:
+	if current_damage >= MAX_DAMAGE and not is_dead:
+		is_dead = true
+		set_physics_process(false) 
+		$AnimatedSprite2D.play("death")
+		await $AnimatedSprite2D.animation_finished
 		print("DRILL BROKEN / MAX DAMAGE!")
-		# here we will add a game over
-		
+		Global.manager.update_ui_tree(Library.GAME_OVER_SCENE)
 #red and shake alarm
 func _start_danger_pulse() -> void:
 	if danger_tween and danger_tween.is_valid():
