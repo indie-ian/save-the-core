@@ -88,7 +88,7 @@ var is_turbo_active: bool = false
 const MAX_DAMAGE: float = 100.0
 const DAMAGE_PER_HIT: float = 2.0 
 const DAMAGE_BREAKABLE: float = 0.5     
-const DAMAGE_UNBREAKABLE: float = 15.0  
+const DAMAGE_UNBREAKABLE: float =10.0  
 
 var current_damage: float = 0.0
 var hit_cooldown: float = 0.0
@@ -413,7 +413,7 @@ func _add_red_temp(degrees: float) -> void:
 		return
 
 	if redlight.visible and current_liquid > 0:
-		_consume_liquid(LIQUID_LOSS_WEAK_CHARGE) 
+		_consume_liquid(degrees * 0.15)
 		return
 		
 	red_temp_deg = clamp(red_temp_deg + degrees, 0.0, MAX_TEMP_DEGREES)

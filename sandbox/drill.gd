@@ -2,22 +2,27 @@ extends Area2D
 
 var turbo_drilling: bool = false
 
-@export var drill_area: Vector2 = Vector2(24,24)
+@export var drill_area: Vector2 = Vector2(24, 24)
 @export var rig: CharacterBody2D # Player mining rig
+
+#rig update
+#The damage becomes 0.5 * delta (0.5 damage per second while you are rubbing against the tile, instead of 30 damage per second).
+#we multiply the temperature/liquid value by delta (5.0 * delta), so that the tank doesn't empty instantaneously
+
 
 func _ready() -> void:
 	body_entered.connect(_drill_strike)
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if rig.velocity == Vector2.ZERO:
 		turbo_drilling = false
 	
-	if has_overlapping_bodies() and (rig.velocity > Vector2.ZERO or rig.velocity < Vector2.ZERO):
+	if has_overlapping_bodies() and rig.velocity != Vector2.ZERO:
 		for body in get_overlapping_bodies():
 			if body is TileMapLayer:
-				_drill_floor(body)
+				_drill_floor(body, delta) 
 
-func _drill_floor(body: Node2D) -> void:
+func _drill_floor(body: Node2D, delta: float) -> void:
 	var hit_hard_tile: bool = false
 	var hit_slow_tile: bool = false
 	var hit_coolant_tile: bool = false
@@ -46,12 +51,15 @@ func _drill_floor(body: Node2D) -> void:
 				else:
 					body.erase_cell(map_pos)
 		
+		
 	if hit_hard_tile:
-		rig._add_damage(rig.DAMAGE_BREAKABLE)
-		rig._add_red_temp(5.0)
+		rig._add_damage(rig.DAMAGE_BREAKABLE * delta)
+		rig._add_red_temp(15.0 * delta)
+		
 	if hit_slow_tile:
 		if !turbo_drilling:
 			rig._apply_slow_effect()
+			
 	if hit_coolant_tile:
 		rig._collect_liquid(0.5)
 
