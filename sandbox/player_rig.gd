@@ -16,8 +16,6 @@ const BAR_OFFSET = Vector2(0, -45)
 const POINTER_START_Y = -25.0 
 const POINTER_END_Y = -70.0    
 
-
-
 var drill_area: Vector2 = Vector2(24, 24)
 var is_charging: bool = false
 var current_charge: float = 0.0
@@ -112,7 +110,6 @@ var dash_cooldown_max: float = 0.0
 
 
 func _ready() -> void:
-	drill.body_entered.connect(_drill_area)
 	$AnimatedSprite2D.play()
 	charge_ui.hide()
 	effects.hide()
@@ -220,6 +217,7 @@ func _physics_process(delta: float) -> void:
 			if charge_ratio >= SWEET_SPOT_MIN and charge_ratio <= SWEET_SPOT_MAX:
 				launch_power = SWEET_SPOT_SPEED
 				shake_strength = 20
+				drill.turbo_drilling = true
 				_trigger_sweet_spot_effects()
 				_start_dash_cooldown(0.0) 
 			else:
@@ -260,11 +258,7 @@ func _physics_process(delta: float) -> void:
 		# if its normal we continue
 		elif expected_speed <= SPEED:
 			is_dashing = false
-	
-	if drill.has_overlapping_bodies():
-		for body in drill.get_overlapping_bodies():
-			if body is TileMapLayer:
-				_drill_area(body)
+
 
 func _launch(target_pos: Vector2, power: float) -> void:
 	velocity = global_position.direction_to(target_pos) * power
@@ -275,42 +269,18 @@ func _launch(target_pos: Vector2, power: float) -> void:
 	if power > OVERCHARGE_SPEED:
 		is_dashing = true
 
-func _drill_area(body: Node2D) -> void:
-	# ignore drill
-	if body == self:
-		return
 
-	# if it is breakable
-	if body is TileMapLayer and body.has_method("erase_cell") and not body.is_in_group("unbreakable"):
-		var broke_tile: bool = false
-		var hit_hard_tile: bool = false
-		
-		for x_pos in drill_area.x / 2:
-			for y_pos in drill_area.y / 2:
-				var q1: Vector2 = Vector2(drill.global_position.x - x_pos, drill.global_position.y - y_pos)
-				var q2: Vector2 = Vector2(drill.global_position.x + x_pos, drill.global_position.y + y_pos)
-				var q3: Vector2 = Vector2(drill.global_position.x - x_pos, drill.global_position.y + y_pos)
-				var q4: Vector2 = Vector2(drill.global_position.x + x_pos, drill.global_position.y - y_pos)
-				
-				for point in [q1, q2, q3, q4]:
-					var map_pos = body.local_to_map(point)
-					if body.get_cell_source_id(map_pos) != -1:
-						var tile_data = body.get_cell_tile_data(map_pos)
-						if tile_data and tile_data.get_custom_data("unbreakable") == true:
-							hit_hard_tile = true
-						else:
-							body.erase_cell(map_pos)
-							broke_tile = true
-							
-		if broke_tile:
-			_add_damage(DAMAGE_BREAKABLE)
-			_add_red_temp(5.0)
-		if hit_hard_tile:
-			_apply_hard_hit()
+func _apply_slow_effect() -> void:
+	velocity = velocity / 1.1
 
-	# if it is not breakable
-	else:
-		_apply_hard_hit()
+
+func _apply_soft_hit() -> void:
+	if hit_cooldown <= 0:
+		hit_cooldown = 0.4 
+		velocity = -velocity * 0.4
+		var hit_tween = create_tween()
+		hit_tween.tween_property(animated_sprite, "modulate", Color.WHITE, 0.3)
+		shake_strength = 8.0
 
 
 func _apply_hard_hit() -> void:
@@ -404,8 +374,12 @@ func _on_area_2d_mouse_entered() -> void:
 func _on_area_2d_mouse_exited() -> void:
 	is_mouse_on_switch = false
 
-
+func _collect_liquid(amount: float) -> void:
+	current_liquid = clamp(current_liquid + amount, 0.0, MAX_LIQUID)
+	var bar_tween = create_tween()
+	bar_tween.tween_property(liquid, "value", current_liquid, 0.5).set_trans(Tween.TRANS_SINE)
 	
+
 func _consume_liquid(amount: float) -> void:
 	current_liquid = clamp(current_liquid - amount, 0.0, MAX_LIQUID)
 	var bar_tween = create_tween()

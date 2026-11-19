@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uoyqjoabae1"
-path="res://.godot/imported/lower_mantle.png-1f096fbdc3ed0d2cb5417d0f5238ee82.ctex"
+uid="uid://bb5xisgx8r3cq"
+path="res://.godot/imported/platform_medium_border.png-e7ca1bb0ab6d9244d3fbd7c430a18c78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment/layers/sprites/lower_mantle.png"
-dest_files=["res://.godot/imported/lower_mantle.png-1f096fbdc3ed0d2cb5417d0f5238ee82.ctex"]
+source_file="res://environment/objects/sprites/platform_medium_border.png"
+dest_files=["res://.godot/imported/platform_medium_border.png-e7ca1bb0ab6d9244d3fbd7c430a18c78.ctex"]
 
 [params]
 

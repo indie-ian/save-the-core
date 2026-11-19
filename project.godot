@@ -41,6 +41,10 @@ folder_colors={
 "res://ui/": "green"
 }
 
+[global_group]
+
+breakable=""
+
 [input]
 
 MOUSE_BUTTON_LEFT={

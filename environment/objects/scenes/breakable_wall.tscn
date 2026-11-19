@@ -9,6 +9,8 @@ offsets = PackedFloat32Array(0, 0.537037)
 colors = PackedColorArray(0.22352941, 0.08627451, 0.2, 1, 0.31764707, 0.14509805, 0.19215687, 1)
 
 [node name="BreakableWall" type="StaticBody2D" unique_id=1283645610 groups=["breakable"]]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_wiskw")
 
 [node name="WallCollision" type="CollisionPolygon2D" parent="." unique_id=118742999]

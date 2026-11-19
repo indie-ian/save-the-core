@@ -4,7 +4,7 @@ extends StaticBody2D
 @onready var wall_sprite: Sprite2D = $WallSprite
 @onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
 
-func _destroy_wall() -> void:
+func destroy() -> void:
 	wall_collision.disabled = true
 	cpu_particles_2d.emitting = true
 	var destroy_tween: Tween = create_tween()

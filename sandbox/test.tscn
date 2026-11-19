@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cyhv5hdrh1trk"]
+
+[ext_resource type="PackedScene" uid="uid://2qkqvn5lbowy" path="res://environment/layers/scenes/outer_core.tscn" id="1_elmxy"]
+[ext_resource type="PackedScene" uid="uid://dgq7fcsrd2bs0" path="res://sandbox/player_rig.tscn" id="2_elmxy"]
+
+[node name="Test" type="Node2D" unique_id=869733586]
+
+[node name="OuterCore" parent="." unique_id=1597098486 node_paths=PackedStringArray("player") instance=ExtResource("1_elmxy")]
+player = NodePath("../RigidBody2D")
+
+[node name="RigidBody2D" parent="." unique_id=945059762 instance=ExtResource("2_elmxy")]
+position = Vector2(-32, -1568)

@@ -17,8 +17,9 @@ position = Vector2(480, 4860)
 [node name="LowerMantle" parent="." unique_id=121458402 instance=ExtResource("3_hbnqd")]
 position = Vector2(480, 8100)
 
-[node name="OuterCore" parent="." unique_id=1597098486 instance=ExtResource("4_mlb10")]
-position = Vector2(480, 11340)
+[node name="OuterCore" parent="." unique_id=1597098486 node_paths=PackedStringArray("player") instance=ExtResource("4_mlb10")]
+position = Vector2(480, 11339)
+player = NodePath("../RigidBody2D")
 
 [node name="RigidBody2D" parent="." unique_id=945059762 instance=ExtResource("2_la80o")]
 position = Vector2(434, 200)
