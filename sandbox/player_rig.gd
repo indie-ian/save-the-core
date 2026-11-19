@@ -545,3 +545,8 @@ func _hide_dash_cooldown_ui() -> void:
 		dash_cool_down.hide()
 		timer_dash.hide()
 	)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") || Input.is_action_pressed("p"):
+		if not is_instance_valid(Global.manager.current_pause):
+			Global.manager.update_pause_tree("uid://bf8i32hypx3yt")

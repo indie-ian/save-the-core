@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://bf8i32hypx3yt"]
+
+[ext_resource type="Script" uid="uid://dcj8281sdxcvt" path="res://ui/menus/Pause/pause_menu.gd" id="1_13tem"]
+[ext_resource type="Texture2D" uid="uid://t152hmm58dyb" path="res://ui/menus/options/background2.png" id="2_ygp8d"]
+[ext_resource type="Theme" uid="uid://cfr3f6n5orvpt" path="res://ui/menus/themes/menu_theme.tres" id="3_s2y1u"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fxuyb"]
+texture = ExtResource("2_ygp8d")
+
+[node name="PauseMenu" type="Control" unique_id=174605805]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_13tem")
+
+[node name="Panel" type="Panel" parent="." unique_id=2107246292]
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 540.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_fxuyb")
+
+[node name="TitleMargin" type="MarginContainer" parent="." unique_id=878753214]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -103.5
+offset_right = 103.5
+offset_bottom = 152.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 32
+
+[node name="TitleLabel" type="Label" parent="TitleMargin" unique_id=359847314]
+layout_mode = 2
+theme = ExtResource("3_s2y1u")
+theme_type_variation = &"TitleTextLabel"
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="text" type="Label" parent="." unique_id=178316951]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 112.0
+offset_right = 911.0
+offset_bottom = 415.0
+theme = ExtResource("3_s2y1u")
+theme_type_variation = &"TitleTextLabel"
+theme_override_font_sizes/font_size = 40
+text = "Controls 
+Left mouse button Charge Dash
+Right mouse button slow move/stop dassh
+Goal
+Get to the core and save the earth
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainButton" type="Button" parent="." unique_id=1530199637]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 384.0
+offset_right = 679.0
+offset_bottom = 411.0
+theme = ExtResource("3_s2y1u")
+text = "MAIN MENU"
+
+[node name="Resume" type="Button" parent="." unique_id=912643616]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 384.0
+offset_right = 439.0
+offset_bottom = 411.0
+theme = ExtResource("3_s2y1u")
+text = "Resume
+"
+metadata/_edit_use_anchors_ = true

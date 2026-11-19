@@ -37,36 +37,6 @@ offset_right = 960.0
 offset_bottom = 540.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_gj5rp")
 
-[node name="Label" type="Label" parent="." unique_id=41048137]
-layout_mode = 0
-offset_left = 529.0
-offset_top = 60.0
-offset_right = 899.0
-offset_bottom = 279.0
-theme_override_font_sizes/font_size = 20
-text = "How to Dig
-Use your mouse to steer.
-Right-click to charge your drill.
-Left-click to move slowly. 
-(Tip Use it to cancel a charge 
-before you collide with a wall.)"
-horizontal_alignment = 2
-
-[node name="Label2" type="Label" parent="." unique_id=1218169341]
-layout_mode = 0
-offset_left = 86.0
-offset_top = 246.0
-offset_right = 944.0
-offset_bottom = 502.0
-theme_override_font_sizes/font_size = 20
-text = "
-Damage: Occurs when you collide with walls.
-Overheat, the temperature rises:
-on the top gauge (Engine):overcharge your drill
-on the bottom gauge (Drill): dig or hit a wall
-Coolant (Liquid Bar): You can use this to cool either the engine or the drill. 
-Hover over the switch with your mouse and press the A button."
-
 [node name="RigidBody2D" parent="." unique_id=945059762 instance=ExtResource("2_8pb1l")]
 position = Vector2(481.00003, 271)
 scale = Vector2(1.5, 1.5)
@@ -96,5 +66,43 @@ offset_top = 472.0
 offset_right = 558.0
 offset_bottom = 512.0
 text = "PLAY"
+
+[node name="text" type="Label" parent="." unique_id=930385363]
+layout_mode = 0
+offset_left = 552.0
+offset_top = 65.0
+offset_right = 898.0
+offset_bottom = 258.0
+theme = ExtResource("1_104xa")
+theme_type_variation = &"TitleTextLabel"
+theme_override_font_sizes/font_size = 24
+text = "How to Dig
+Use your mouse to steer.
+Right-click to charge your drill.
+Left-click to move slowly.
+(Tip Use it to cancel a charge
+before you collide with a wall.)
+"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="text2" type="Label" parent="." unique_id=1815823416]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 263.0
+offset_right = 787.0
+offset_bottom = 484.0
+theme = ExtResource("1_104xa")
+theme_type_variation = &"TitleTextLabel"
+theme_override_font_sizes/font_size = 24
+text = "
+Damage: Occurs when you collide with walls.
+Overheat, the temperature rises:
+on the top gauge (Engine):overcharge your drill
+on the bottom gauge (Drill): dig or hit a wall
+Liquid Bar: You can use this to cool either the engine or the drill. 
+Hover over the switch with your mouse and press the A button.
+"
+vertical_alignment = 1
 
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]
