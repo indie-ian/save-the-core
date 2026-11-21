@@ -354,13 +354,9 @@ func _add_damage(amount: float) -> void:
 		else:
 			damage_bar.modulate = Color.WHITE
 			
-	if current_damage >= MAX_DAMAGE and not is_dead:
-		is_dead = true
-		set_physics_process(false) 
-		$AnimatedSprite2D.play("death")
-		await $AnimatedSprite2D.animation_finished
-		print("DRILL BROKEN / MAX DAMAGE!")
-		Global.manager.update_ui_tree(Library.GAME_OVER_SCENE)
+	if current_damage >= MAX_DAMAGE:
+		_trigger_game_over("DRILL BROKEN / MAX DAMAGE!")
+		
 #red and shake alarm
 func _start_danger_pulse() -> void:
 	if danger_tween and danger_tween.is_valid():
@@ -418,6 +414,10 @@ func _add_green_temp(degrees: float) -> void:
 		
 	green_temp_deg = clamp(green_temp_deg + degrees, 0.0, MAX_TEMP_DEGREES)
 	_update_green_needle()
+	
+	if green_temp_deg >= MAX_TEMP_DEGREES:
+		_trigger_game_over("GREEN OVERHEATED!")
+
 
 func _add_red_temp(degrees: float) -> void:
 	if degrees < 0:
@@ -431,6 +431,9 @@ func _add_red_temp(degrees: float) -> void:
 		
 	red_temp_deg = clamp(red_temp_deg + degrees, 0.0, MAX_TEMP_DEGREES)
 	_update_red_needle()
+	
+	if red_temp_deg >= MAX_TEMP_DEGREES:
+		_trigger_game_over("RED OVERHEATED!")
 
 # blinkssss
 func _start_clock_warning(clock_sprite: Sprite2D, is_green: bool) -> void:
@@ -560,3 +563,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") || Input.is_action_pressed("p"):
 		if not is_instance_valid(Global.manager.current_pause):
 			Global.manager.update_pause_tree(Library.PAUSE_SCENE)
+
+func _trigger_game_over(reason: String) -> void:
+	if is_dead:
+		return
+	is_dead = true
+	set_physics_process(false)
+	$AnimatedSprite2D.play("death")
+	await $AnimatedSprite2D.animation_finished
+	print(reason)
+	Global.manager.update_ui_tree(Library.GAME_OVER_SCENE)

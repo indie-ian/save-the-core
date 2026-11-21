@@ -17,6 +17,14 @@ size = Vector2(69, 559)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3xxw"]
 size = Vector2(1093, 79)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xip1d"]
+bg_color = Color(0.74509805, 0.75686276, 0.5294118, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
+
 [node name="Node2D" type="Control" unique_id=1878776274]
 layout_mode = 3
 anchors_preset = 0
@@ -69,13 +77,16 @@ text = "PLAY"
 
 [node name="text" type="Label" parent="." unique_id=930385363]
 layout_mode = 0
-offset_left = 552.0
-offset_top = 65.0
+offset_left = 523.0
+offset_top = 61.0
 offset_right = 898.0
-offset_bottom = 258.0
+offset_bottom = 254.0
 theme = ExtResource("1_104xa")
 theme_type_variation = &"TitleTextLabel"
-theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 26
 text = "How to Dig
 Use your mouse to steer.
 Right-click to charge your drill.
@@ -88,13 +99,15 @@ vertical_alignment = 1
 
 [node name="text2" type="Label" parent="." unique_id=1815823416]
 layout_mode = 0
-offset_left = 81.0
-offset_top = 263.0
-offset_right = 787.0
-offset_bottom = 484.0
+offset_left = 85.0
+offset_top = 267.0
+offset_right = 851.0
+offset_bottom = 488.0
 theme = ExtResource("1_104xa")
 theme_type_variation = &"TitleTextLabel"
-theme_override_font_sizes/font_size = 24
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 26
 text = "
 Damage: Occurs when you collide with walls.
 Overheat, the temperature rises:
@@ -103,6 +116,25 @@ on the bottom gauge (Drill): dig or hit a wall
 Liquid Bar: You can use this to cool either the engine or the drill. 
 Hover over the switch with your mouse and press the A button.
 "
+vertical_alignment = 1
+
+[node name="Panel3" type="Panel" parent="." unique_id=1562817992]
+layout_mode = 0
+offset_left = 320.0
+offset_top = -29.0
+offset_right = 640.0
+offset_bottom = 27.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xip1d")
+
+[node name="TitleLabel" type="Label" parent="Panel3" unique_id=1319418694]
+layout_mode = 0
+offset_left = -3.0
+offset_right = 320.0
+offset_bottom = 56.0
+theme = ExtResource("1_104xa")
+theme_type_variation = &"TitleTextLabel"
+text = "TUTORIAL"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]

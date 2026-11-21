@@ -7,6 +7,14 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7b8qr"]
 texture = ExtResource("1_nq8qp")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dosym"]
+bg_color = Color(0.74509805, 0.75686276, 0.5294118, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
+
 [node name="Control" type="Control" unique_id=1612976632]
 layout_mode = 3
 anchors_preset = 15
@@ -32,14 +40,6 @@ offset_right = 103.5
 offset_bottom = 152.0
 grow_horizontal = 2
 theme_override_constants/margin_top = 32
-
-[node name="TitleLabel" type="Label" parent="CanvasLayer/TitleMargin" unique_id=1013304371]
-layout_mode = 2
-theme = ExtResource("2_tjj4k")
-theme_type_variation = &"TitleTextLabel"
-text = "GAME OVER"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="text" type="Label" parent="CanvasLayer" unique_id=1834786504]
 offset_left = 128.0
@@ -72,3 +72,20 @@ offset_bottom = 411.0
 theme = ExtResource("2_tjj4k")
 text = "Retry
 "
+
+[node name="Panel3" type="Panel" parent="CanvasLayer" unique_id=854899491]
+offset_left = 288.0
+offset_top = 72.0
+offset_right = 736.0
+offset_bottom = 192.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dosym")
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/Panel3" unique_id=1013304371]
+layout_mode = 0
+offset_right = 448.0
+offset_bottom = 120.0
+theme = ExtResource("2_tjj4k")
+theme_type_variation = &"TitleTextLabel"
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1

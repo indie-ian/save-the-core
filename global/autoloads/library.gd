@@ -22,4 +22,5 @@ const TUTORIAL_SCENE: String = "uid://ykrgrxyf58rm"
 const GAME_OVER_SCENE: String = "uid://b7583w60ia177"
 const PAUSE_SCENE: String = "uid://bf8i32hypx3yt"
 const GAME_UI_SCENE: String = "uid://c41j38xxrp4sb"
+const FINAL_SCENE: String = "uid://orqfdslfyhok"
 #endregion

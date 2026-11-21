@@ -4,6 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://t152hmm58dyb" path="res://ui/menus/options/background2.png" id="2_yg080"]
 [ext_resource type="Theme" uid="uid://cfr3f6n5orvpt" path="res://ui/menus/themes/menu_theme.tres" id="3_f7fvn"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vb7dy"]
+bg_color = Color(0.74509805, 0.75686276, 0.5294118, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
+
 [node name="Story" type="Control" unique_id=558978913]
 layout_mode = 3
 anchors_preset = 15
@@ -62,3 +70,34 @@ horizontal_alignment = 1
 [node name="Timer" type="Timer" parent="." unique_id=483413335]
 wait_time = 10.0
 autostart = true
+
+[node name="MainButton" type="Button" parent="." unique_id=1971810796]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 424.0
+offset_right = 527.0
+offset_bottom = 451.0
+theme = ExtResource("3_f7fvn")
+text = "SKIP"
+
+[node name="Panel2" type="Panel" parent="." unique_id=1754693383]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 72.0
+offset_right = 712.0
+offset_bottom = 144.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vb7dy")
+
+[node name="TitleLabel" type="Label" parent="Panel2" unique_id=1964206793]
+layout_mode = 0
+offset_top = -16.0
+offset_right = 456.0
+offset_bottom = 88.0
+theme = ExtResource("3_f7fvn")
+theme_type_variation = &"TitleTextLabel"
+theme_override_colors/font_outline_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 70
+text = "SAVE THE CORE"
+horizontal_alignment = 1
+vertical_alignment = 1

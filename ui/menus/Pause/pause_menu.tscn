@@ -1,11 +1,19 @@
 [gd_scene format=3 uid="uid://bf8i32hypx3yt"]
 
-[ext_resource type="Script" uid="uid://dcj8281sdxcvt" path="res://ui/menus/pause/pause_menu.gd" id="1_13tem"]
+[ext_resource type="Script" uid="uid://dcj8281sdxcvt" path="res://ui/menus/Pause/pause_menu.gd" id="1_13tem"]
 [ext_resource type="Texture2D" uid="uid://t152hmm58dyb" path="res://ui/menus/options/background2.png" id="2_ygp8d"]
 [ext_resource type="Theme" uid="uid://cfr3f6n5orvpt" path="res://ui/menus/themes/menu_theme.tres" id="3_s2y1u"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fxuyb"]
 texture = ExtResource("2_ygp8d")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gj5rp"]
+bg_color = Color(0.74509805, 0.75686276, 0.5294118, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
 
 [node name="PauseMenu" type="Control" unique_id=174605805]
 process_mode = 3
@@ -22,25 +30,6 @@ layout_mode = 0
 offset_right = 960.0
 offset_bottom = 540.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_fxuyb")
-
-[node name="TitleMargin" type="MarginContainer" parent="." unique_id=878753214]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -103.5
-offset_right = 103.5
-offset_bottom = 152.0
-grow_horizontal = 2
-theme_override_constants/margin_top = 32
-
-[node name="TitleLabel" type="Label" parent="TitleMargin" unique_id=359847314]
-layout_mode = 2
-theme = ExtResource("3_s2y1u")
-theme_type_variation = &"TitleTextLabel"
-text = "PAUSED"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="text" type="Label" parent="." unique_id=178316951]
 layout_mode = 0
@@ -79,3 +68,21 @@ theme = ExtResource("3_s2y1u")
 text = "Resume
 "
 metadata/_edit_use_anchors_ = true
+
+[node name="Panel2" type="Panel" parent="." unique_id=184432050]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 72.0
+offset_right = 576.0
+offset_bottom = 128.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gj5rp")
+
+[node name="TitleLabel" type="Label" parent="Panel2" unique_id=359847314]
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 56.0
+theme = ExtResource("3_s2y1u")
+theme_type_variation = &"TitleTextLabel"
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
