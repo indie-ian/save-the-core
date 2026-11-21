@@ -17,7 +17,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if check_if_safe:
-		print("Check Safe: %s" % [ check_if_safe])
 		for platform in get_tree().get_nodes_in_group("safe_platform"):
 			if platform.get_overlapping_bodies().has(player):
 				player_is_safe = true
@@ -39,5 +38,5 @@ func _start_checks(body: Node2D) -> void:
 
 
 # Player finishes the game.
-func _end_game() -> void:
+func _end_game(body: Node2D) -> void:
 	pass

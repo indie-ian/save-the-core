@@ -13,7 +13,7 @@ var previous_pause
 
 @onready var game_state: GameState = $States/GameState
 @onready var node2d_tree: Node2D = $Node2DTree
-@onready var ui_tree: Control = $UITree
+@onready var ui_tree: CanvasLayer = $UITree
 @onready var narrative_tree: CanvasLayer = $NarrativeTree
 @onready var pause_tree: CanvasLayer = $PauseTree
 

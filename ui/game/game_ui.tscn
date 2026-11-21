@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://c41j38xxrp4sb"]
+
+[ext_resource type="Script" uid="uid://crkyf2doha4jv" path="res://ui/game/game_ui.gd" id="1_yc87g"]
+[ext_resource type="Theme" uid="uid://bjm5c4b1kgtnn" path="res://ui/game/themes/game_theme.tres" id="2_d7okr"]
+
+[sub_resource type="Animation" id="Animation_ef5wp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/LayerLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_er48e"]
+resource_name = "display_layer"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/LayerLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5333333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ifajk"]
+_data = {
+&"RESET": SubResource("Animation_ef5wp"),
+&"display_layer": SubResource("Animation_er48e")
+}
+
+[node name="GameUI" type="Control" unique_id=1852249486]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_yc87g")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1643861510]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 16
+
+[node name="LayerLabel" type="Label" parent="MarginContainer" unique_id=630351938]
+layout_mode = 2
+theme = ExtResource("2_d7okr")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1968672989]
+libraries/ = SubResource("AnimationLibrary_ifajk")

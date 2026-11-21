@@ -15,7 +15,5 @@ func _on_main_menu_pressed() -> void:
 	Global.manager.update_ui_tree(Library.MAIN_MENU_SCENE)
 
 func _on_retry_pressed() -> void:
-	
-	Global.manager.current_ui = null
-	queue_free()
-	Global.manager.update_node2d_tree(Library.GAME)
+	Global.manager.update_node2d_tree(Library.GAME_SCENE)
+	Global.manager.update_ui_tree(Library.GAME_UI_SCENE)

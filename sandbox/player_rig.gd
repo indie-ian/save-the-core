@@ -21,6 +21,9 @@ var is_charging: bool = false
 var current_charge: float = 0.0
 var overcharged: bool = false 
 var shake_strength: float = 0.0
+var current_speed: float = 0.0
+var previous_speed: float = 0.0
+var modulate_drilling_sound: bool = false
 
 @onready var drill: Area2D = $Drill
 @onready var charge_ui: Node2D = $chargeUI
@@ -183,6 +186,8 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and (dash_cooldown_timer <= 0.0 or is_charging or overcharged):
 		if not overcharged:
+			if !Sounds.charge.playing:
+				Sounds.charge_up()
 			is_charging = true
 			charge_ui.show() 
 			
@@ -199,6 +204,7 @@ func _physics_process(delta: float) -> void:
 			
 			# Overcharge 
 			if current_charge >= MAX_CHARGE_TIME:
+				Sounds.overcharge.play()
 				_launch(mouse_pos, OVERCHARGE_SPEED)
 				overcharged = true
 				_trigger_overcharge_effects()
@@ -241,6 +247,7 @@ func _physics_process(delta: float) -> void:
 		shake_strength = lerp(shake_strength, 0.0, 10.0 * delta)
 		camera.offset = Vector2(randf_range(-shake_strength, shake_strength),randf_range(-shake_strength, shake_strength))
 	
+	
 	move_and_slide()
 	
 	
@@ -262,6 +269,8 @@ func _physics_process(delta: float) -> void:
 
 func _launch(target_pos: Vector2, power: float) -> void:
 	velocity = global_position.direction_to(target_pos) * power
+	Sounds.modulate_engine(velocity)
+	Sounds.charge.stop()
 	is_charging = false
 	current_charge = 0.0
 	charge_ui.hide()
@@ -285,6 +294,7 @@ func _apply_soft_hit() -> void:
 
 func _apply_hard_hit() -> void:
 	if hit_cooldown <= 0:
+		Sounds.impact.play()
 		_add_red_temp(20.0)
 		_add_damage(DAMAGE_UNBREAKABLE)
 		hit_cooldown = 0.4 
@@ -549,4 +559,4 @@ func _hide_dash_cooldown_ui() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") || Input.is_action_pressed("p"):
 		if not is_instance_valid(Global.manager.current_pause):
-			Global.manager.update_pause_tree("uid://bf8i32hypx3yt")
+			Global.manager.update_pause_tree(Library.PAUSE_SCENE)

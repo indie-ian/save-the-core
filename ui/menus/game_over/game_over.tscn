@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b7583w60ia177"]
 
 [ext_resource type="Texture2D" uid="uid://t152hmm58dyb" path="res://ui/menus/options/background2.png" id="1_nq8qp"]
-[ext_resource type="Script" uid="uid://kk06ihmcdkuf" path="res://ui/menus/GameOver/game_over.gd" id="1_tjj4k"]
+[ext_resource type="Script" uid="uid://kk06ihmcdkuf" path="res://ui/menus/game_over/game_over.gd" id="1_tjj4k"]
 [ext_resource type="Theme" uid="uid://cfr3f6n5orvpt" path="res://ui/menus/themes/menu_theme.tres" id="2_tjj4k"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7b8qr"]

@@ -17,17 +17,13 @@ metadata/_custom_type_script = "uid://bn6j84cyjb4yj"
 
 [node name="Node2DTree" type="Node2D" parent="." unique_id=2116376932]
 
-[node name="UITree" type="Control" parent="." unique_id=44916047]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="UITree" type="CanvasLayer" parent="." unique_id=194074182]
 
 [node name="Splash" parent="UITree" unique_id=1191906707 instance=ExtResource("2_0vy1w")]
-layout_mode = 1
 
 [node name="NarrativeTree" type="CanvasLayer" parent="." unique_id=1975526959]
+layer = 2
 
 [node name="PauseTree" type="CanvasLayer" parent="." unique_id=516355939]
+process_mode = 2
+layer = 3

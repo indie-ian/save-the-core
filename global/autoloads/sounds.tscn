@@ -1,11 +1,39 @@
 [gd_scene format=3 uid="uid://ci4bsd68th4n"]
 
 [ext_resource type="Script" uid="uid://drxhvmkdy1gkw" path="res://global/autoloads/sounds.gd" id="1_ytj0o"]
-[ext_resource type="AudioStream" uid="uid://ck5g1iyiwbgfl" path="res://global/sounds/music.ogg" id="2_wek05"]
+[ext_resource type="AudioStream" uid="uid://cp1icjwgxlgyr" path="res://global/sounds/music.ogg" id="2_wek05"]
+[ext_resource type="AudioStream" uid="uid://xeicaldxdl2y" path="res://global/sounds/drilling.wav" id="3_jqjfx"]
+[ext_resource type="AudioStream" uid="uid://cgu510qwiv8g1" path="res://global/sounds/impact.wav" id="4_4gmac"]
+[ext_resource type="AudioStream" uid="uid://bi13reqkcujxg" path="res://global/sounds/overcharge.wav" id="5_ieito"]
+[ext_resource type="AudioStream" uid="uid://q6vlu7qswpcu" path="res://global/sounds/charge.ogg" id="6_ieito"]
 
 [node name="Sounds" type="Node" unique_id=4235750]
 script = ExtResource("1_ytj0o")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1502954927]
 stream = ExtResource("2_wek05")
+volume_db = -10.0
 bus = &"Music"
+
+[node name="Drilling" type="AudioStreamPlayer" parent="." unique_id=534655526]
+stream = ExtResource("3_jqjfx")
+bus = &"SFX"
+
+[node name="Impact" type="AudioStreamPlayer" parent="." unique_id=730316726]
+stream = ExtResource("4_4gmac")
+bus = &"SFX"
+
+[node name="Overcharge" type="AudioStreamPlayer" parent="." unique_id=1638073785]
+stream = ExtResource("5_ieito")
+bus = &"SFX"
+
+[node name="Charge" type="AudioStreamPlayer" parent="." unique_id=2065474460]
+stream = ExtResource("6_ieito")
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="." unique_id=1011843107]
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="." unique_id=272389864]
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="." unique_id=1973935531]
+
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="." unique_id=870088658]

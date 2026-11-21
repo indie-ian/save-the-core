@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://bpmrdrwlc53gw"]
+
+[ext_resource type="Texture2D" uid="uid://x8lapd6lrfq3" path="res://game/layers_background.png" id="1_l2kpj"]
+[ext_resource type="Script" uid="uid://dm87hygqwyyag" path="res://game/earth_layers.gd" id="1_y7vm8"]
+[ext_resource type="PackedScene" uid="uid://ddoe0fwsp2ace" path="res://environment/layers/scenes/crust.tscn" id="2_cj3dy"]
+[ext_resource type="PackedScene" uid="uid://ccal7mvdwa7jr" path="res://environment/layers/scenes/upper_mantle.tscn" id="3_y7vm8"]
+[ext_resource type="PackedScene" uid="uid://b64pm1sr5i0sc" path="res://environment/layers/scenes/lower_mantle.tscn" id="4_c5iie"]
+[ext_resource type="PackedScene" uid="uid://2qkqvn5lbowy" path="res://environment/layers/scenes/outer_core.tscn" id="5_7giyy"]
+[ext_resource type="PackedScene" uid="uid://dgq7fcsrd2bs0" path="res://sandbox/player_rig.tscn" id="6_ff1tq"]
+[ext_resource type="Texture2D" uid="uid://brt1yjskm6y00" path="res://environment/layers/sprites/background_buffer.png" id="7_cj3dy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ry8ac"]
+size = Vector2(208, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nhtxp"]
+size = Vector2(352, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2twm1"]
+size = Vector2(256, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h3nqg"]
+size = Vector2(896, 32)
+
+[node name="EarthLayers" type="Node2D" unique_id=417656315 node_paths=PackedStringArray("player")]
+script = ExtResource("1_y7vm8")
+player = NodePath("Player")
+
+[node name="TopBuffer" type="Sprite2D" parent="." unique_id=350151718]
+position = Vector2(0, -7070)
+texture = ExtResource("7_cj3dy")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1800205469]
+texture = ExtResource("1_l2kpj")
+
+[node name="Crust" parent="." unique_id=1719055717 instance=ExtResource("2_cj3dy")]
+position = Vector2(0, -5184)
+
+[node name="UpperMantle" parent="." unique_id=278756004 instance=ExtResource("3_y7vm8")]
+position = Vector2(0, -2000)
+
+[node name="LowerMantle" parent="." unique_id=121458402 instance=ExtResource("4_c5iie")]
+position = Vector2(0, 1200)
+
+[node name="OuterCore" parent="." unique_id=1597098486 node_paths=PackedStringArray("player") instance=ExtResource("5_7giyy")]
+position = Vector2(-16, 4416)
+player = NodePath("../Player")
+
+[node name="Player" parent="." unique_id=945059762 instance=ExtResource("6_ff1tq")]
+position = Vector2(-64, -6624)
+
+[node name="CrustEntrance" type="Area2D" parent="." unique_id=1946105171]
+position = Vector2(-128, -6416)
+
+[node name="EntranceCollision" type="CollisionShape2D" parent="CrustEntrance" unique_id=1861356082]
+position = Vector2(8, 48)
+shape = SubResource("RectangleShape2D_ry8ac")
+
+[node name="UpperMantleEntrance" type="Area2D" parent="." unique_id=1584851755]
+position = Vector2(-112, -3648)
+
+[node name="EntranceCollision" type="CollisionShape2D" parent="UpperMantleEntrance" unique_id=731197150]
+shape = SubResource("RectangleShape2D_nhtxp")
+
+[node name="LowerMantleEntrance" type="Area2D" parent="." unique_id=1353272530]
+position = Vector2(-32, -352)
+
+[node name="EntranceCollision" type="CollisionShape2D" parent="LowerMantleEntrance" unique_id=1603628294]
+position = Vector2(0, -48)
+shape = SubResource("RectangleShape2D_2twm1")
+
+[node name="CoreEntrance" type="Area2D" parent="." unique_id=1286260678]
+position = Vector2(0, 2800)
+
+[node name="EntranceCollision" type="CollisionShape2D" parent="CoreEntrance" unique_id=336167238]
+shape = SubResource("RectangleShape2D_h3nqg")
