@@ -69,7 +69,7 @@ const COOL_DROP_DEGREES: float = 80.0 # rotation
 const COOL_LIQUID_COST: float = 15.0  # liquid from cooling
 
 const MAX_LIQUID: float = 100.0
-const LIQUID_LOSS_OVERCHARGE: float = 5.0  # liquid Overcharge loss
+const LIQUID_LOSS_OVERCHARGE: float = 10.0  # liquid Overcharge loss
 const LIQUID_LOSS_WEAK_CHARGE: float = 2.5 # if you let mouse to early liquid loss 60%
 var current_liquid: float = MAX_LIQUID
 const LIQUID_PER_DEGREE: float = 0.25

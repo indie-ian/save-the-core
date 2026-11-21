@@ -19,7 +19,7 @@ const ZOOM_TRIGGER_FRAME := 9
 
 @onready var main_button: Button = $Panel3/MainButton
 
-
+var charge_started: bool = false
 var base_zoom: Vector2 = Vector2.ONE
 var cover_zoom: Vector2 = Vector2.ONE
 var planet_start_zoom: Vector2 = Vector2.ONE
@@ -81,6 +81,9 @@ func _process(delta: float) -> void:
 	if anim_sprite.animation == FIRST_ANIM and anim_sprite.is_playing():
 		if anim_sprite.frame >= ZOOM_TRIGGER_FRAME:
 			is_zoom_active = true
+			if not charge_started:
+				charge_started = true
+				Sounds.charge_up()
 
 	if is_zoom_active:
 		target_zoom = base_zoom * zoom_in_multiplier
@@ -111,6 +114,8 @@ func _on_animation_finished() -> void:
 		camera.zoom = cover_zoom
 		anim_sprite.speed_scale = 1.0
 		anim_sprite.play(FLASH_ANIM)
+		Sounds.stop_charge(0.04)
+		Sounds.play_boom()
 
 	elif anim_sprite.animation == FLASH_ANIM:
 		is_zoom_active = false

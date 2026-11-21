@@ -39,4 +39,11 @@ func _start_checks(body: Node2D) -> void:
 
 # Player finishes the game.
 func _end_game(body: Node2D) -> void:
-	pass
+	if body == player or body is CharacterBody2D:
+		_open_final_scene(Library.FINAL_SCENE)
+
+
+func _open_final_scene(scene_path: String) -> void:
+	if Global.manager.current_ui:
+		Global.manager.current_ui.hide()
+	Global.manager.update_node2d_tree(scene_path)

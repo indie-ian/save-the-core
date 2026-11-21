@@ -6,17 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b64pm1sr5i0sc" path="res://environment/layers/scenes/lower_mantle.tscn" id="3_hbnqd"]
 [ext_resource type="PackedScene" uid="uid://2qkqvn5lbowy" path="res://environment/layers/scenes/outer_core.tscn" id="4_mlb10"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aj4uu"]
-bg_color = Color(0.11372549, 0.050980393, 0.16862746, 1)
-
 [node name="EarthLayers" type="Node2D" unique_id=417656315]
-
-[node name="Panel2" type="Panel" parent="." unique_id=198736759]
-offset_left = -835.0
-offset_top = -322.0
-offset_right = 1675.0
-offset_bottom = 13322.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_aj4uu")
 
 [node name="CrustNew" parent="." unique_id=1719055717 instance=ExtResource("1_u3cit")]
 position = Vector2(480, 1620)

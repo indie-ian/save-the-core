@@ -33,3 +33,18 @@ func charge_up() -> void:
 			charge_tween.kill()
 	charge_tween = create_tween()
 	charge_tween.tween_property(charge, "volume_linear", 5.0, 2.0)
+
+func stop_charge(fade_time: float = 0.05) -> void:
+	if charge_tween:
+		charge_tween.kill()
+	if charge.playing:
+		if fade_time > 0.0:
+			charge_tween = create_tween()
+			charge_tween.tween_property(charge, "volume_linear", 0.0, fade_time)
+			await charge_tween.finished
+		charge.stop()
+		charge.volume_linear = 0.0
+
+
+func play_boom() -> void:
+	overcharge.play()

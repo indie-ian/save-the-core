@@ -148,11 +148,3 @@ theme_override_font_sizes/font_size = 70
 text = "SAVE THE CORE"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Button" type="Button" parent="." unique_id=1396846437]
-layout_mode = 0
-offset_left = 98.0
-offset_top = 122.0
-offset_right = 311.0
-offset_bottom = 392.0
-text = "final scene"
