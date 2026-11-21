@@ -89,8 +89,8 @@ theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 26
 text = "How to Dig
 Use your mouse to steer.
-Right-click to charge your drill.
-Left-click to move slowly.
+Left-click to charge your drill.
+Right-click to move slowly.
 (Tip Use it to cancel a charge
 before you collide with a wall.)
 "

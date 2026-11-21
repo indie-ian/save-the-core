@@ -56,7 +56,7 @@ layout_mode = 2
 theme = ExtResource("3_f7fvn")
 theme_type_variation = &"TitleTextLabel"
 text = "You must jump start it back 
-to it's superheated state."
+to it's functioning state."
 horizontal_alignment = 1
 
 [node name="Line3" type="Label" parent="NarrativeVBox" unique_id=1382484744]

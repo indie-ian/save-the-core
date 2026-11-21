@@ -126,6 +126,42 @@ position = Vector2(-339, -424)
 [node name="DamageVent2" parent="Vents" unique_id=920085906 instance=ExtResource("2_1vldd")]
 position = Vector2(267, 185)
 
+[node name="Breakables" type="Node2D" parent="." unique_id=579891991]
+
+[node name="BreakableWall5" parent="Breakables" unique_id=1283645610 instance=ExtResource("6_dqx8v")]
+position = Vector2(330, 761)
+scale = Vector2(1.5, 1.5)
+
+[node name="BreakableWall9" parent="Breakables" unique_id=1310155312 instance=ExtResource("6_dqx8v")]
+position = Vector2(321, 1415)
+scale = Vector2(1.5, 1.5)
+
+[node name="BreakableWall10" parent="Breakables" unique_id=336549667 instance=ExtResource("6_dqx8v")]
+position = Vector2(-333, 1432)
+scale = Vector2(1.5, 1.5)
+
+[node name="BreakableWall6" parent="Breakables" unique_id=2141978082 instance=ExtResource("6_dqx8v")]
+position = Vector2(326, -234)
+scale = Vector2(1.5, 1.5)
+
+[node name="BreakableWall8" parent="Breakables" unique_id=917249691 instance=ExtResource("6_dqx8v")]
+position = Vector2(322, -1330)
+scale = Vector2(1.5, 1.5)
+
+[node name="BreakableWall11" parent="Breakables" unique_id=212194519 instance=ExtResource("6_dqx8v")]
+position = Vector2(-322, 222)
+scale = Vector2(1.5, 1.5)
+
+[node name="BreakableWall7" parent="Breakables" unique_id=2019835903 instance=ExtResource("6_dqx8v")]
+position = Vector2(325, -797)
+scale = Vector2(1.5, 1.5)
+
+[node name="BreakableWall4" parent="Breakables" unique_id=564396186 instance=ExtResource("6_dqx8v")]
+position = Vector2(-371, 753)
+
+[node name="BreakableWall12" parent="Breakables" unique_id=1765870855 instance=ExtResource("6_dqx8v")]
+position = Vector2(-300, -968)
+
 [node name="DamageDeposits" type="Node2D" parent="." unique_id=2107654933]
 
 [node name="LargeDamageDeposit" parent="DamageDeposits" unique_id=322803910 instance=ExtResource("3_on81w")]
@@ -271,14 +307,3 @@ rotation = -0.95410234
 [node name="SmallDamageDeposit15" parent="DamageDeposits" unique_id=2021797931 instance=ExtResource("5_dnayt")]
 position = Vector2(-158, 1292.9999)
 rotation = -0.95410234
-
-[node name="Breakables" type="Node2D" parent="." unique_id=579891991]
-
-[node name="BreakableWall" parent="Breakables" unique_id=1283645610 instance=ExtResource("6_dqx8v")]
-position = Vector2(90, -469)
-
-[node name="BreakableWall2" parent="Breakables" unique_id=2022790806 instance=ExtResource("6_dqx8v")]
-position = Vector2(-103, 905)
-
-[node name="BreakableWall3" parent="Breakables" unique_id=280552756 instance=ExtResource("6_dqx8v")]
-position = Vector2(105, 905)
