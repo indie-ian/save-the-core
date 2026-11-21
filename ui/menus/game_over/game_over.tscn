@@ -48,9 +48,8 @@ offset_right = 842.0
 offset_bottom = 396.0
 theme = ExtResource("2_tjj4k")
 theme_type_variation = &"TitleTextLabel"
-text = "You're dead af.
-You didn't make the Earth spin,
-and now not even your drill spins.
+text = "
+You failed to reach the core.
 Wanna try again?
 "
 horizontal_alignment = 1
