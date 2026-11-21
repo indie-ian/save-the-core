@@ -15,7 +15,7 @@ func _ready() -> void:
 	hurt_area.body_entered.connect(_start_checks)
 	heat_timer.timeout.connect(_heat_player)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if check_if_safe:
 		for platform in get_tree().get_nodes_in_group("safe_platform"):
 			if platform.get_overlapping_bodies().has(player):
@@ -38,6 +38,7 @@ func _start_checks(body: Node2D) -> void:
 
 
 # Player finishes the game.
+<<<<<<< Updated upstream
 func _end_game(body: Node2D) -> void:
 	if body == player or body is CharacterBody2D:
 		_open_final_scene(Library.FINAL_SCENE)
@@ -47,3 +48,10 @@ func _open_final_scene(scene_path: String) -> void:
 	if Global.manager.current_ui:
 		Global.manager.current_ui.hide()
 	Global.manager.update_node2d_tree(scene_path)
+=======
+func _end_game(_body: Node2D) -> void:
+	Global.manager.game_state.end_time()
+	Global.manager.update_node2d_tree(Library.FINAL_SCENE)
+	Global.manager.current_ui.queue_free()
+	
+>>>>>>> Stashed changes

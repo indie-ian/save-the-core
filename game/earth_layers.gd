@@ -23,6 +23,8 @@ func _ready() -> void:
 	upper_mantle_entrance.body_entered.connect(_enter_layer.bind(upper_mantle_entrance))
 	lower_mantle_entrance.body_entered.connect(_enter_layer.bind(lower_mantle_entrance))
 	core_entrance.body_entered.connect(_enter_layer.bind(core_entrance))
+	
+	Global.manager.game_state.start_time()
 
 
 func _enter_layer(body: Node2D, area: Area2D) -> void:

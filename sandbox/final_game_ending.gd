@@ -18,6 +18,7 @@ const ZOOM_TRIGGER_FRAME := 9
 @export var zoom_out_end_multiplier: float = 0.2
 
 @onready var main_button: Button = $Panel3/MainButton
+@onready var score_label: Label = $Panel3/ScoreLabel
 
 var charge_started: bool = false
 var base_zoom: Vector2 = Vector2.ONE
@@ -50,6 +51,8 @@ func _ready() -> void:
 
 	anim_sprite.speed_scale = 1.0
 	anim_sprite.play(FIRST_ANIM)
+	
+	score_label.text = "Score: %02d:%02d" % [ Global.manager.game_state.end_time_min, Global.manager.game_state.end_time_sec ]
 
 func _process(delta: float) -> void:
 	if is_flash_active:
