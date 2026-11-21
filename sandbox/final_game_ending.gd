@@ -52,7 +52,7 @@ func _ready() -> void:
 	anim_sprite.speed_scale = 1.0
 	anim_sprite.play(FIRST_ANIM)
 	
-	score_label.text = "Score: %02d:%02d" % [ Global.manager.game_state.end_time_min, Global.manager.game_state.end_time_sec ]
+	score_label.text = "Time: %02d:%02d" % [ Global.manager.game_state.end_time_min, Global.manager.game_state.end_time_sec ]
 
 func _process(delta: float) -> void:
 	if is_flash_active:

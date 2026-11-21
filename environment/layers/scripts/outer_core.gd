@@ -38,20 +38,7 @@ func _start_checks(body: Node2D) -> void:
 
 
 # Player finishes the game.
-<<<<<<< Updated upstream
-func _end_game(body: Node2D) -> void:
-	if body == player or body is CharacterBody2D:
-		_open_final_scene(Library.FINAL_SCENE)
-
-
-func _open_final_scene(scene_path: String) -> void:
-	if Global.manager.current_ui:
-		Global.manager.current_ui.hide()
-	Global.manager.update_node2d_tree(scene_path)
-=======
 func _end_game(_body: Node2D) -> void:
 	Global.manager.game_state.end_time()
 	Global.manager.update_node2d_tree(Library.FINAL_SCENE)
 	Global.manager.current_ui.queue_free()
-	
->>>>>>> Stashed changes

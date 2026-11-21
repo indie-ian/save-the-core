@@ -426,7 +426,7 @@ theme_override_colors/font_outline_color = Color(0.14901961, 0.1882353, 0.266666
 theme_override_constants/line_spacing = 3
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 35
-text = "score:
+text = "Time:
 "
 horizontal_alignment = 1
 
