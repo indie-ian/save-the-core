@@ -35,16 +35,16 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_7b8qr")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -103.5
-offset_right = 103.5
+offset_left = -127.5
+offset_right = 79.5
 offset_bottom = 152.0
 grow_horizontal = 2
 theme_override_constants/margin_top = 32
 
 [node name="text" type="Label" parent="CanvasLayer" unique_id=1834786504]
-offset_left = 128.0
+offset_left = 104.0
 offset_top = 144.0
-offset_right = 842.0
+offset_right = 818.0
 offset_bottom = 396.0
 theme = ExtResource("2_tjj4k")
 theme_type_variation = &"TitleTextLabel"
@@ -56,26 +56,26 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MainButton" type="Button" parent="CanvasLayer" unique_id=1958446181]
-offset_left = 584.0
+offset_left = 560.0
 offset_top = 384.0
-offset_right = 679.0
+offset_right = 655.0
 offset_bottom = 411.0
 theme = ExtResource("2_tjj4k")
 text = "MAIN MENU"
 
 [node name="Retry" type="Button" parent="CanvasLayer" unique_id=1076890998]
-offset_left = 344.0
+offset_left = 320.0
 offset_top = 384.0
-offset_right = 439.0
+offset_right = 415.0
 offset_bottom = 411.0
 theme = ExtResource("2_tjj4k")
 text = "Retry
 "
 
 [node name="Panel3" type="Panel" parent="CanvasLayer" unique_id=854899491]
-offset_left = 288.0
+offset_left = 264.0
 offset_top = 72.0
-offset_right = 736.0
+offset_right = 712.0
 offset_bottom = 192.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_dosym")
 

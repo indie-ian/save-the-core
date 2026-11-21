@@ -70,7 +70,7 @@ const COOL_LIQUID_COST: float = 15.0  # liquid from cooling
 
 const MAX_LIQUID: float = 100.0
 const LIQUID_LOSS_OVERCHARGE: float = 10.0  # liquid Overcharge loss
-const LIQUID_LOSS_WEAK_CHARGE: float = 2.5 # if you let mouse to early liquid loss 60%
+const LIQUID_LOSS_WEAK_CHARGE: float = 4.5 # if you let mouse to early liquid loss 60%
 var current_liquid: float = MAX_LIQUID
 const LIQUID_PER_DEGREE: float = 0.25
 
@@ -152,6 +152,16 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_mouse_on_switch and Input.is_action_just_pressed("coolingbutton"):
 		_toggle_cooling_switch()
+	
+	if not is_switching:
+		if current_liquid <= 0:
+			if coolingtubes.animation != "empty":
+				coolingtubes.play("empty")
+		else:
+			if redlight.visible and coolingtubes.animation != "coolingRed":
+				coolingtubes.play("coolingRed")
+			elif not redlight.visible and coolingtubes.animation != "coolingGreen":
+				coolingtubes.play("coolingGreen")
 	
 	if hit_cooldown > 0:
 		hit_cooldown -= delta
@@ -235,7 +245,7 @@ func _physics_process(delta: float) -> void:
 				_start_dash_cooldown(calculated_cooldown)
 				
 				if charge_ratio < 0.60:
-					_consume_liquid(LIQUID_LOSS_WEAK_CHARGE)
+					_add_green_temp(10.0) 
 			
 			_launch(mouse_pos, launch_power) 
 			
@@ -399,6 +409,7 @@ func _consume_liquid(amount: float) -> void:
 		bar_tween.parallel().tween_property(liquid, "modulate", Color.WHITE, 0.5)
 		
 	if current_liquid <= 0:
+		coolingtubes.play("empty")
 		print("no liquid")
 
 
@@ -409,7 +420,7 @@ func _add_green_temp(degrees: float) -> void:
 		return
 
 	if not redlight.visible and current_liquid > 0:
-		_consume_liquid(LIQUID_LOSS_OVERCHARGE) 
+		_consume_liquid(degrees * 0.5)
 		return
 		
 	green_temp_deg = clamp(green_temp_deg + degrees, 0.0, MAX_TEMP_DEGREES)
@@ -468,7 +479,12 @@ func _toggle_cooling_switch() -> void:
 		redlight.show()
 		green_light.hide()
 		
-		if red_temp_deg > 0 and current_liquid > 0:
+		if current_liquid <= 0:
+			coolingtubes.play("empty")
+			is_switching = false
+			return
+			
+		if red_temp_deg > 0:
 			var needed_liquid: float = red_temp_deg * LIQUID_PER_DEGREE
 			var liquid_used: float = min(current_liquid, needed_liquid)
 			var degrees_cooled: float = liquid_used / LIQUID_PER_DEGREE
@@ -478,14 +494,22 @@ func _toggle_cooling_switch() -> void:
 			
 		coolingtubes.play("coolswitchRed")
 		await coolingtubes.animation_finished
-		coolingtubes.play("coolingRed")
+		if current_liquid <= 0:
+			coolingtubes.play("empty")
+		else:
+			coolingtubes.play("coolingRed")
 	else:
 		switch.play("redToGreen")
 		await switch.animation_finished
 		green_light.show()
 		redlight.hide()
 		
-		if green_temp_deg > 0 and current_liquid > 0:
+		if current_liquid <= 0:
+			coolingtubes.play("empty")
+			is_switching = false
+			return
+			
+		if green_temp_deg > 0:
 			var needed_liquid: float = green_temp_deg * LIQUID_PER_DEGREE
 			var liquid_used: float = min(current_liquid, needed_liquid)
 			var degrees_cooled: float = liquid_used / LIQUID_PER_DEGREE
@@ -495,7 +519,10 @@ func _toggle_cooling_switch() -> void:
 			
 		coolingtubes.play("coolingswitchGreen")
 		await coolingtubes.animation_finished
-		coolingtubes.play("coolingGreen")
+		if current_liquid <= 0:
+			coolingtubes.play("empty")
+		else:
+			coolingtubes.play("coolingGreen")
 		
 	is_switching = false
 	

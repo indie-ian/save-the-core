@@ -23,6 +23,14 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r16d8"]
+bg_color = Color(0.74509805, 0.75686276, 0.5294118, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
+
 [node name="Credits" type="Control" unique_id=1138913588]
 layout_mode = 3
 anchors_preset = 15
@@ -99,6 +107,24 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 theme = ExtResource("1_qjml7")
 text = "MAIN MENU"
+
+[node name="Panel3" type="Panel" parent="ButtonMargin/MainButton" unique_id=214699760]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 16.0
+offset_right = 640.0
+offset_bottom = 72.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_r16d8")
+
+[node name="TitleLabel" type="Label" parent="ButtonMargin/MainButton/Panel3" unique_id=1994420940]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 56.0
+theme = ExtResource("1_qjml7")
+theme_type_variation = &"TitleTextLabel"
+text = "TUTORIAL"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Panel4" type="Panel" parent="." unique_id=1873735128]
 layout_mode = 0

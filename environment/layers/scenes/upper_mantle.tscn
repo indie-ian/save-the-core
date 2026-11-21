@@ -77,6 +77,9 @@ custom_data_layer_2/name = "liquid"
 custom_data_layer_2/type = 1
 sources/0 = SubResource("TileSetAtlasSource_bm7yx")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4p740"]
+bg_color = Color(0.11372549, 0.050980393, 0.16862746, 1)
+
 [node name="UpperMantle" type="Node2D" unique_id=278756004]
 
 [node name="Walls" type="StaticBody2D" parent="." unique_id=111099802]
@@ -217,3 +220,17 @@ position = Vector2(259, 622)
 
 [node name="DamageVent2" parent="." unique_id=1098765649 instance=ExtResource("6_a1k7n")]
 position = Vector2(329, -197)
+
+[node name="Panel" type="Panel" parent="." unique_id=1536175860]
+offset_left = 463.0
+offset_top = -1728.0
+offset_right = 1502.0
+offset_bottom = 1608.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4p740")
+
+[node name="Panel2" type="Panel" parent="." unique_id=1997892471]
+offset_left = -1421.0
+offset_top = -1738.0
+offset_right = -474.0
+offset_bottom = 1598.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4p740")

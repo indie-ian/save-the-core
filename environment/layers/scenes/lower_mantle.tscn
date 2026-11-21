@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://eka4lmkl2k3a" path="res://environment/objects/scenes/small_damage_deposit.tscn" id="5_dnayt"]
 [ext_resource type="PackedScene" uid="uid://uqe3lnjhvr36" path="res://environment/objects/scenes/breakable_wall.tscn" id="6_dqx8v"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_on81w"]
+bg_color = Color(0.11372549, 0.050980393, 0.16862746, 1)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ri6b4"]
 texture = ExtResource("3_dqx8v")
 0:0/0 = 0
@@ -78,6 +81,20 @@ custom_data_layer_2/type = 1
 sources/0 = SubResource("TileSetAtlasSource_ri6b4")
 
 [node name="LowerMantle" type="Node2D" unique_id=121458402]
+
+[node name="Panel2" type="Panel" parent="." unique_id=856937317]
+offset_left = -1171.0
+offset_top = -1727.0
+offset_right = -475.0
+offset_bottom = 1609.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_on81w")
+
+[node name="Panel" type="Panel" parent="." unique_id=355248935]
+offset_left = 472.0
+offset_top = -1734.0
+offset_right = 1168.0
+offset_bottom = 1602.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_on81w")
 
 [node name="Walls" type="StaticBody2D" parent="." unique_id=1150246343]
 

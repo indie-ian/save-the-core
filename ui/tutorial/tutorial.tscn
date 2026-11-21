@@ -111,7 +111,7 @@ theme_override_font_sizes/font_size = 26
 text = "
 Damage: Occurs when you collide with walls.
 Overheat, the temperature rises:
-on the top gauge (Engine):overcharge your drill
+on the top gauge (Engine):Overcharging or undercharging your drill.
 on the bottom gauge (Drill): dig or hit a wall
 Liquid Bar: You can use this to cool either the engine or the drill. 
 Hover over the switch with your mouse and press the A button.

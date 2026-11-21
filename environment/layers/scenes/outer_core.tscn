@@ -88,6 +88,9 @@ custom_data_layer_2/name = "liquid"
 custom_data_layer_2/type = 1
 sources/0 = SubResource("TileSetAtlasSource_bvugs")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p1k1x"]
+bg_color = Color(0.61960787, 0.49411765, 0.20392157, 1)
+
 [node name="OuterCore" type="Node2D" unique_id=1597098486]
 script = ExtResource("1_brax4")
 
@@ -236,6 +239,20 @@ texture = ExtResource("7_46icn")
 
 [node name="HeatTimer" type="Timer" parent="." unique_id=1899140313]
 one_shot = true
+
+[node name="Panel" type="Panel" parent="." unique_id=288837353]
+offset_left = 472.0
+offset_top = -1624.0
+offset_right = 1168.0
+offset_bottom = 1647.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_p1k1x")
+
+[node name="Panel2" type="Panel" parent="." unique_id=2141297892]
+offset_left = -1161.0
+offset_top = -1621.0
+offset_right = -465.0
+offset_bottom = 1688.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_p1k1x")
 
 [editable path="LargePlatforms/FloatingPlatformLargeOpen"]
 [editable path="LargePlatforms/FloatingPlatformLargeOpen2"]

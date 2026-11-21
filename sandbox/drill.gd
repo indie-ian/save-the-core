@@ -1,6 +1,7 @@
 extends Area2D
 
 var turbo_drilling: bool = false
+var is_drilling_now: bool = false
 
 @export var drill_area: Vector2 = Vector2(24, 24)
 @export var rig: CharacterBody2D # Player mining rig
@@ -14,13 +15,20 @@ func _ready() -> void:
 	body_entered.connect(_drill_strike)
 
 func _physics_process(delta: float) -> void:
+	is_drilling_now = false
+	
 	if rig.velocity == Vector2.ZERO:
 		turbo_drilling = false
 	
 	if has_overlapping_bodies() and rig.velocity != Vector2.ZERO:
 		for body in get_overlapping_bodies():
 			if body is TileMapLayer:
-				_drill_floor(body, delta) 
+				_drill_floor(body, delta)
+	
+	if rig and rig.animated_sprite and rig.animated_sprite.material:
+		var target_heat: float = 0.85 if is_drilling_now else 0.0
+		var current_heat: float = rig.animated_sprite.material.get_shader_parameter("tip_heat")
+		rig.animated_sprite.material.set_shader_parameter("tip_heat", lerp(current_heat, target_heat, 12.0 * delta))
 
 func _drill_floor(body: Node2D, delta: float) -> void:
 	var hit_hard_tile: bool = false
@@ -40,6 +48,10 @@ func _drill_floor(body: Node2D, delta: float) -> void:
 			
 			for point in [q1, q2, q3, q4]:
 				var map_pos = body.local_to_map(point)
+				if body.get_cell_source_id(map_pos) == -1:
+					continue
+					
+				is_drilling_now = true
 				var tile_data = body.get_cell_tile_data(map_pos)
 				if tile_data and tile_data.get_custom_data("hard") == true and !turbo_drilling:
 					hit_hard_tile = true
@@ -51,10 +63,9 @@ func _drill_floor(body: Node2D, delta: float) -> void:
 				else:
 					body.erase_cell(map_pos)
 		
-		
 	if hit_hard_tile:
 		rig._add_damage(rig.DAMAGE_BREAKABLE * delta)
-		rig._add_red_temp(15.0 * delta)
+		rig._add_red_temp(20.0 * delta)
 		
 	if hit_slow_tile:
 		if !turbo_drilling:
@@ -73,6 +84,6 @@ func _drill_strike(body: Node2D) -> void:
 			body.destroy.call_deferred()
 		else:
 			rig._apply_soft_hit()
-			
+			rig._add_damage(10.0) 
 	else:
 		rig._apply_hard_hit()
