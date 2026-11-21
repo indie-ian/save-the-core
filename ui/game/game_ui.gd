@@ -9,6 +9,5 @@ func _ready() -> void:
 
 
 func _display_layer(layer_name: String) -> void:
-	print("display")
 	layer_label.text = layer_name
 	animation_player.play("display_layer")

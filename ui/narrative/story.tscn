@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://chin2ctxvbkyw"]
+
+[ext_resource type="Script" uid="uid://5stwg7ru1n3q" path="res://ui/narrative/story.gd" id="1_vb7dy"]
+[ext_resource type="Texture2D" uid="uid://t152hmm58dyb" path="res://ui/menus/options/background2.png" id="2_yg080"]
+[ext_resource type="Theme" uid="uid://cfr3f6n5orvpt" path="res://ui/menus/themes/menu_theme.tres" id="3_f7fvn"]
+
+[node name="Story" type="Control" unique_id=558978913]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vb7dy")
+
+[node name="Background" type="TextureRect" parent="." unique_id=2047752216]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yg080")
+
+[node name="NarrativeVBox" type="VBoxContainer" parent="." unique_id=508311303]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -571.5
+offset_top = -76.0
+offset_right = 571.5
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line1" type="Label" parent="NarrativeVBox" unique_id=1876840115]
+layout_mode = 2
+theme = ExtResource("3_f7fvn")
+theme_type_variation = &"TitleTextLabel"
+text = "The earths core is becoming dormant."
+horizontal_alignment = 1
+
+[node name="Line2" type="Label" parent="NarrativeVBox" unique_id=1113328775]
+layout_mode = 2
+theme = ExtResource("3_f7fvn")
+theme_type_variation = &"TitleTextLabel"
+text = "You must jump start it back 
+to it's superheated state."
+horizontal_alignment = 1
+
+[node name="Line3" type="Label" parent="NarrativeVBox" unique_id=1382484744]
+layout_mode = 2
+theme = ExtResource("3_f7fvn")
+theme_type_variation = &"TitleTextLabel"
+text = "Time is short, 
+the whole world is counting on you."
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=483413335]
+wait_time = 10.0
+autostart = true

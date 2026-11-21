@@ -10,4 +10,4 @@ func _gui_input(event: InputEvent) -> void:
 		_skip_intro()
 
 func _skip_intro() -> void:
-	Global.manager.update_ui_tree(Library.MAIN_MENU_SCENE, false)
+	Global.manager.update_ui_tree(Library.STORY_SCENE, false)

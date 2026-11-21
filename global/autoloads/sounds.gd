@@ -27,7 +27,6 @@ func modulate_engine(velocity: Vector2) -> void:
 		drilling.stop()
 
 func charge_up() -> void:
-	print("charge up")
 	charge.volume_linear = 0.0
 	charge.play()
 	if charge_tween:

@@ -14,6 +14,7 @@ const GAME_SCENE: String = "uid://bpmrdrwlc53gw"
 
 #region UI Scenes
 const SPLASH_SCENE: String = "uid://qmtiqk86qvf1"
+const STORY_SCENE: String = "uid://chin2ctxvbkyw"
 const MAIN_MENU_SCENE: String = "uid://uu71xp4cia35"
 const OPTIONS_SCENE: String = "uid://dihhhs4atxs2v"
 const CREDITS_SCENE: String = "uid://camkq2dhxi78"
