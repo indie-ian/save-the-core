@@ -52,6 +52,7 @@ var modulate_drilling_sound: bool = false
 @onready var dash_cool_down: Sprite2D = $stats/DashCoolDown
 @onready var timer_dash: TextureProgressBar = $stats/timerDash
 
+@onready var drill_particles: CPUParticles2D = $DrillParticles
 
 #for temperature
 #how cooling works
@@ -147,7 +148,13 @@ func _ready() -> void:
 	timer_dash.value = 0
 	dash_cool_down.hide()
 	timer_dash.hide()
-	
+
+func _process(delta: float) -> void:
+	if abs(velocity.length()) > 0:
+		drill_particles.emitting = true
+	else:
+		drill_particles.emitting = false
+
 
 func _physics_process(delta: float) -> void:
 	if is_mouse_on_switch and Input.is_action_just_pressed("coolingbutton"):

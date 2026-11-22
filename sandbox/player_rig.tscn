@@ -395,6 +395,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_jeklb"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33950618, 0.70987654)
+colors = PackedColorArray(0.4745098, 0.2509804, 0.2, 1, 0.31764707, 0.14509805, 0.19215687, 1, 0.22352941, 0.08627451, 0.2, 1)
+
 [node name="RigidBody2D" type="CharacterBody2D" unique_id=945059762]
 scale = Vector2(2, 2)
 motion_mode = 1
@@ -545,6 +550,20 @@ offset_right = -52.66667
 offset_bottom = -1.4999962
 value = 100.0
 texture_progress = ExtResource("18_ddewd")
+
+[node name="DrillParticles" type="CPUParticles2D" parent="." unique_id=1625062128]
+position = Vector2(28, 0)
+emitting = false
+amount = 30
+lifetime = 0.5
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_max = 720.0
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+color_initial_ramp = SubResource("Gradient_jeklb")
 
 [connection signal="mouse_entered" from="stats/Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="stats/Area2D" to="." method="_on_area_2d_mouse_exited"]
