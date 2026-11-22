@@ -7,28 +7,12 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gj5rp"]
 texture = ExtResource("2_4dwoy")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gj5rp"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ry8ac"]
 bg_color = Color(0.74509805, 0.75686276, 0.5294118, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4dwoy"]
-bg_color = Color(0.74509805, 0.75686276, 0.5294118, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r16d8"]
-bg_color = Color(0.74509805, 0.75686276, 0.5294118, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
 
 [node name="Credits" type="Control" unique_id=1138913588]
@@ -46,42 +30,36 @@ offset_right = 960.0
 offset_bottom = 540.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_gj5rp")
 
-[node name="Panel3" type="Panel" parent="." unique_id=241218857]
-layout_mode = 0
-offset_left = 192.0
-offset_top = 104.0
-offset_right = 768.0
-offset_bottom = 256.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_gj5rp")
+[node name="TitleMargin" type="MarginContainer" parent="." unique_id=105963841]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -88.0
+offset_right = 88.0
+offset_bottom = 96.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 20
 
-[node name="Label" type="Label" parent="Panel3" unique_id=2099526904]
-layout_mode = 0
-offset_top = 40.0
-offset_right = 576.0
-offset_bottom = 152.0
-theme = ExtResource("1_qjml7")
-theme_type_variation = &"SmallTextLabel"
-theme_override_colors/font_outline_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
-theme_override_constants/line_spacing = 3
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 35
-text = "Code, Art, and Design
-Simigdalius and Indie Ian
-"
-horizontal_alignment = 1
+[node name="TitlePanel" type="Panel" parent="TitleMargin" unique_id=146289204]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ry8ac")
 
-[node name="Panel2" type="Panel" parent="." unique_id=146289204]
-layout_mode = 0
-offset_left = 384.0
-offset_top = 72.0
-offset_right = 576.0
-offset_bottom = 128.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_4dwoy")
-
-[node name="TitleLabel" type="Label" parent="Panel2" unique_id=929572519]
-layout_mode = 0
-offset_right = 192.0
-offset_bottom = 56.0
+[node name="TitleLabel" type="Label" parent="TitleMargin/TitlePanel" unique_id=929572519]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -24.0
+offset_right = 81.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_qjml7")
 theme_type_variation = &"TitleTextLabel"
 text = "CREDITS"
@@ -108,37 +86,83 @@ layout_mode = 2
 theme = ExtResource("1_qjml7")
 text = "MAIN MENU"
 
-[node name="Panel3" type="Panel" parent="ButtonMargin/MainButton" unique_id=214699760]
-layout_mode = 0
-offset_left = 320.0
-offset_top = 16.0
-offset_right = 640.0
-offset_bottom = 72.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_r16d8")
+[node name="CreditsMargin" type="MarginContainer" parent="." unique_id=1779491957]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 111
 
-[node name="TitleLabel" type="Label" parent="ButtonMargin/MainButton/Panel3" unique_id=1994420940]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 56.0
+[node name="CreditsVBox" type="VBoxContainer" parent="CreditsMargin" unique_id=1205234986]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="DeveloperPanel" type="Panel" parent="CreditsMargin/CreditsVBox" unique_id=1186887757]
+custom_minimum_size = Vector2(704, 96)
+layout_mode = 2
 theme = ExtResource("1_qjml7")
-theme_type_variation = &"TitleTextLabel"
-text = "TUTORIAL"
+
+[node name="DeveloperLabel" type="Label" parent="CreditsMargin/CreditsVBox/DeveloperPanel" unique_id=2099526904]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -158.5
+offset_top = -35.5
+offset_right = 158.5
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_qjml7")
+theme_type_variation = &"SmallTextLabel"
+theme_override_colors/font_outline_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
+theme_override_constants/line_spacing = 3
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 33
+text = "Code, Art, and Design
+Simigdalius and Indie Ian"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel4" type="Panel" parent="." unique_id=1873735128]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 264.0
-offset_right = 832.0
-offset_bottom = 416.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_gj5rp")
+[node name="AssetPanel" type="Panel" parent="CreditsMargin/CreditsVBox" unique_id=1081964313]
+custom_minimum_size = Vector2(0, 224)
+layout_mode = 2
+theme = ExtResource("1_qjml7")
 
-[node name="Label2" type="Label" parent="Panel4" unique_id=1338455532]
-layout_mode = 0
-offset_top = 40.0
-offset_right = 704.0
-offset_bottom = 144.0
+[node name="AssetVBox" type="VBoxContainer" parent="CreditsMargin/CreditsVBox/AssetPanel" unique_id=644217915]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -326.0
+offset_top = -109.0
+offset_right = 326.0
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MusicSFXLabel" type="Label" parent="CreditsMargin/CreditsVBox/AssetPanel/AssetVBox" unique_id=99309077]
+layout_mode = 2
+theme = ExtResource("1_qjml7")
+theme_type_variation = &"SmallTextLabel"
+theme_override_colors/font_outline_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
+theme_override_constants/line_spacing = 3
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 35
+text = "Music and SFX"
+horizontal_alignment = 1
+
+[node name="MusicSFXAuthorLabel" type="Label" parent="CreditsMargin/CreditsVBox/AssetPanel/AssetVBox" unique_id=1338455532]
+layout_mode = 2
 theme = ExtResource("1_qjml7")
 theme_type_variation = &"SmallTextLabel"
 theme_override_colors/font_outline_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
@@ -149,17 +173,23 @@ shapeforms : shapeforms-audio-free-sfx
 kenney.nl : sci-fi-sounds"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="Panel4" unique_id=99309077]
-layout_mode = 0
-offset_left = 8.0
-offset_right = 704.0
-offset_bottom = 75.0
+[node name="FontLabel" type="Label" parent="CreditsMargin/CreditsVBox/AssetPanel/AssetVBox" unique_id=1022575376]
+layout_mode = 2
 theme = ExtResource("1_qjml7")
 theme_type_variation = &"SmallTextLabel"
 theme_override_colors/font_outline_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
 theme_override_constants/line_spacing = 3
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 35
-text = "music and sfx
-"
+text = "Font"
+horizontal_alignment = 1
+
+[node name="FontAuthorLabel" type="Label" parent="CreditsMargin/CreditsVBox/AssetPanel/AssetVBox" unique_id=1671812904]
+layout_mode = 2
+theme = ExtResource("1_qjml7")
+theme_type_variation = &"SmallTextLabel"
+theme_override_colors/font_outline_color = Color(0.14901961, 0.1882353, 0.26666668, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 32
+text = "PixelOperator"
 horizontal_alignment = 1
